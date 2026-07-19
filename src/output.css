@@ -699,6 +699,10 @@ video {
   text-transform: uppercase;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .text-muted {
   --tw-text-opacity: 1;
   color: rgb(160 163 171 / var(--tw-text-opacity, 1));

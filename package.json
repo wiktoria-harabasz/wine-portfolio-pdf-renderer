@@ -20,6 +20,9 @@
   },
   "dependencies": {
     "@sanity/client": "^7.23.2",
-    "dotenv": "^17.4.2"
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "puppeteer": "^25.3.0"
   }
 }
