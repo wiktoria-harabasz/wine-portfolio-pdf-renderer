@@ -19,6 +19,10 @@
     }
   }
 
+  body {
+    margin: 0;
+  }
+
   * {
     text-box: trim-both cap alphabetic;
     font-family: 'TWK Lausanne' sans-serif;
@@ -77,11 +81,13 @@
   
   
 
-.page {
+  .page {
     width: 210mm;
-    height: 297mm;
+    min-height: 297mm;
+    box-sizing: border-box;
     page-break-after: always;
-    padding: 40px;
+    break-after: page;
+
   }
 
   tr {

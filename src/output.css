@@ -562,6 +562,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
 .mt-64 {
   margin-top: 16rem;
 }
@@ -574,6 +578,10 @@ video {
   display: table;
 }
 
+.h-2 {
+  height: 0.5rem;
+}
+
 .h-\[17px\] {
   height: 17px;
 }
@@ -582,8 +590,12 @@ video {
   height: 24px;
 }
 
-.h-2 {
-  height: 0.5rem;
+.w-2 {
+  width: 0.5rem;
+}
+
+.w-3 {
+  width: 0.75rem;
 }
 
 .w-\[17px\] {
@@ -596,14 +608,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-2 {
-  width: 0.5rem;
-}
-
-.w-3 {
-  width: 0.75rem;
 }
 
 .border-collapse {
@@ -626,6 +630,10 @@ video {
   justify-content: space-between;
 }
 
+.gap-1 {
+  gap: 0.25rem;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
@@ -634,8 +642,8 @@ video {
   gap: 1rem;
 }
 
-.gap-1 {
-  gap: 0.25rem;
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .border-r {
@@ -651,9 +659,24 @@ video {
   background-color: rgb(255 253 241 / var(--tw-bg-opacity, 1));
 }
 
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .py-2 {
@@ -677,6 +700,20 @@ video {
   font-family: TWK Lausanne, sans-serif;
 }
 
+.font-display {
+  font-family: TWK Lausanne, sans-serif;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -687,12 +724,12 @@ video {
   line-height: 1rem;
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
 .font-bold {
   font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .uppercase {
@@ -708,9 +745,17 @@ video {
   color: rgb(160 163 171 / var(--tw-text-opacity, 1));
 }
 
+.no-underline {
+  text-decoration-line: none;
+}
+
 @page {
   size: A4;
 
+  margin: 0;
+}
+
+body {
   margin: 0;
 }
 
@@ -762,9 +807,11 @@ video {
 
 .page {
   width: 210mm;
-  height: 297mm;
+  min-height: 297mm;
+  box-sizing: border-box;
   page-break-after: always;
-  padding: 40px;
+  -moz-column-break-after: page;
+       break-after: page;
 }
 
 tr {

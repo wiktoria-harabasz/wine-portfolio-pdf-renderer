@@ -26,5 +26,14 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     isAllocationOnly
     }
   }`
+
+  const ALL_PRODUCERS_QUERY = `*[_type == "producer"] | order(country asc, producerName asc){
+    _id,
+    producerName,
+    country,
+    region->{name},
+    "slug": slug.current
+  }`
   
-  module.exports = { PRODUCER_QUERY }
+  
+  module.exports = { PRODUCER_QUERY, ALL_PRODUCERS_QUERY }

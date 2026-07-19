@@ -1,4 +1,5 @@
 // src/templates/producer.js
+const fs = require('fs')
 
 const ALL_COLUMNS = [
     { key: 'wineType', label: '' },
@@ -145,4 +146,18 @@ function renderTable (wines) {
 
 }
 
-module.exports = { renderTable }
+function renderProducerPage(producer) {
+    const tableHtml = renderTable(producer.wines)
+    const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
+    return template
+      .replace('<!-- PRODUCER_NAME -->', producer.producerName)
+      .replace('<!-- PRODUCER_SLUG -->', producer.slug || producer._id)
+      .replace('<!-- PRODUCER_COUNTRY -->', producer.country || '')
+      .replace('<!-- PRODUCER_REGION -->', producer.region?.name || '')
+      .replace('<!-- PRODUCER_SUBREGION -->', producer.subregion?.map(s => s.name).join(', ') || '')
+      .replace('<!-- PRODUCER_MAP -->', producer.mapImageUrl || '')
+      .replace('<!-- PRODUCER_INFO -->', producer.producerInfo || '')
+      .replace('<!-- WINE_TABLE -->', tableHtml)
+  }
+
+module.exports = { renderTable, renderProducerPage }
