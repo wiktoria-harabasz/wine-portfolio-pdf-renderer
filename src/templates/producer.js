@@ -18,7 +18,7 @@ const ALL_COLUMNS = [
 ]
 
 function hasValue(val) {
-    if (val == undefined || val == null || value == '') return false
+    if (val == undefined || val == null || val == '') return false
     if (Array.isArray(val) && val.length == 0) return false
     if (typeof val == 'boolean') return val == true
     return true
@@ -41,7 +41,7 @@ const WINE_TYPE_ICONS = {
 function renderWineTypeCell(wine) {
     const iconPath = WINE_TYPE_ICONS[wine.wineType]
     const colorIcon = iconPath
-    ? `<img src="${iconPath}" alt="${wine.wineType} class="w-2 h-2" />`
+    ? `<img src="${iconPath}" alt="${wine.wineType}" class="w-2 h-2" />`
     : ''
 
     const sparklingIcon = wine.isSparkling
@@ -62,7 +62,8 @@ function renderCell(wine, key) {
     const strikeClass = soldOut ? `line-through opacity-50` : ''
 
     if (key === 'wineType') {
-        return WINE_TYPE_ICONS[wine.wineType] || ''
+        if (key === 'wineType') {
+            return renderWineTypeCell(wine)
     }
 
     if (key === 'grapeVariety') {
@@ -87,6 +88,7 @@ function renderCell(wine, key) {
     if (key === 'bottleSize') {
         if (wine.bottleSize === 'magnum') return '1.5L'
         if (wine.bottleSize === 'half') return '1/2 0.375L'
+        return ''
     }
 
     if (key === 'name') {
@@ -109,11 +111,11 @@ function renderCell(wine, key) {
       return `<span class="${strikeClass}">${wine[key] ?? ''}</span>`
 }
 
-function renderTables (wines) {
+function renderTable (wines) {
     const columns = getVisibleColumns(wines)
 
     const headerHtml = columns
-    .map(col => `<th class="text-left font-semibold px-3 py-2 border-ink/10 last:border-r-0">${col.label}</th>`)
+    .map(col => `<th class="text-left font-semibold px-3 py-2 border-r border-ink/10 last:border-r-0">${col.label}</th>`)
     .join('')
 
     const rowsHtml = wines 
