@@ -15,10 +15,10 @@ async function generate(producerId) {
   const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
   const output = template
     .replace('<!-- WINE_TABLE -->', tableHtml)
-    .replace('<!-- PRODUCER_TITLE -->', producer.title)
+    .replace('<!-- PRODUCER_TITLE -->', producer.producerName )
 
   fs.writeFileSync('./src/preview.html', output)
-  console.log('Generated src/preview.html for', producer.title)
+  console.log('Generated src/preview.html for', producer.producerName)
 }
 
-generate('YOUR_PRODUCER_DOCUMENT_ID')
+generate('52b54374-90ad-4548-9741-490abba77cc7')

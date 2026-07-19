@@ -3,7 +3,7 @@
 const ALL_COLUMNS = [
     { key: 'wineType', label: '' },
     { key: 'vintage', label: 'Vint.' },
-    { key: 'name', label: 'Name' },
+    { key: 'wineName', label: 'Name' },
     { key: 'grapeVariety', label: 'Grape Variety' },
     { key: 'classification', label: 'Classification' },
     { key: 'dosage', label: 'Dosage' },
@@ -24,11 +24,16 @@ function hasValue(val) {
     return true
 }
 
-function getVisibleColumns(wines) {
-    return ALL_COLUMNS.filter(col =>
-        wines.some(wine => hasValue(wine[col.key]))
-    )
-}
+const COLUMN_VALUE_GETTERS = {
+    bottleSize: (wine) => wine.isSmallBottle || wine.isMagnumBottle,
+  }
+
+  function getVisibleColumns(wines) {
+    return ALL_COLUMNS.filter(col => {
+      const getValue = COLUMN_VALUE_GETTERS[col.key] || (wine => wine[col.key])
+      return wines.some(wine => hasValue(getValue(wine)))
+    })
+  }
 
 const WINE_TYPE_ICONS = {
     white: 'assets/icons/white.svg',
@@ -68,7 +73,7 @@ function renderCell(wine, key) {
 
     if (key === 'grapeVariety') {
         const value = Array.isArray(wine.grapeVariety)
-        ? wine.grapeVariety.join ('<br>')
+        ? wine.grapeVariety.map(g => g.name).join ('<br>')
         : wine.grapeVariety
         return `<span class="${strikeClass}">${value ?? ''}</span>`
     }
@@ -86,12 +91,12 @@ function renderCell(wine, key) {
     }
 
     if (key === 'bottleSize') {
-        if (wine.bottleSize === 'magnum') return '1.5L'
-        if (wine.bottleSize === 'half') return '1/2 0.375L'
+       if (wine.isMagnumBottle) return '1.5L'
+        if (wine.isSmallBottle) return '1/2 0.375L'
         return ''
     }
 
-    if (key === 'name') {
+    if (key === 'wineName') {
         let statusHtml = ''
         if (soldOut) {
             statusHtml = `<span class="text-red-600 font-bold ml-2">SOLD OUT!</span>`
@@ -100,7 +105,7 @@ function renderCell(wine, key) {
         } else if (wine.isBackInStock) {
             statusHtml = `<div class="text-green-600 text-xs font-bold">Back in Stock!</div>`
         }
-        return `<span class="font-bold ${strikeClass}">${wine.name}</span>${statusHtml}`
+        return `<span class="font-bold ${strikeClass}">${wine.wineName}</span>${statusHtml}`
         
     }
 
@@ -109,6 +114,7 @@ function renderCell(wine, key) {
     }
 
       return `<span class="${strikeClass}">${wine[key] ?? ''}</span>`
+}
 }
 
 function renderTable (wines) {
