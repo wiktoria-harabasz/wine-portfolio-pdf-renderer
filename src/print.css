@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@layer base {
+    body {
+      font-family: theme('TWK Lausanne.body');
+      
+    }
+  
+    h1, h2, h3, h4, h5, h6, p, a, button, table {
+      font-family: theme('TWK Lausanne.display');
+      
+    }
+  }
+
+  * {
+    text-box: trim-both cap alphabetic;
+    font-family: 'TWK Lausanne' sans-serif;
+  }
+
+ 
+  .text-button {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+  }
+
+  .text-legend {
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 300;
+  }
+  .text-h1 {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight:600;
+
+
+  }
+  
+  
+  .text-h2 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+
+   
+  }
+  
+
+  .text-h3 {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+
+  }
+  
+  
+  .text-body {
+    font-size: 12px;
+    line-height: 16px;
+
+  }
+
+
+  .text-subheading-number {
+    font-size: 10px;
+    line-height: 14px;
+    font-weight: 300;
+  }
+  
+  
+
+.page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    padding: 40px;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
