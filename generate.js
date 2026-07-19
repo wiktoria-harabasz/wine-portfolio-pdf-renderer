@@ -17,7 +17,7 @@ async function generate(producerId) {
     .replace('<!-- PRODUCER_NAME -->', producer.producerName )
     .replace('<!-- PRODUCER_COUNTRY -->', producer.country || '')
     .replace('<!-- PRODUCER_REGION -->', producer.region?.name || '')
-    .replace('<!-- PRODUCER_SUBREGION -->', producer.subregion?.name || '')
+    .replace('<!-- PRODUCER_SUBREGION -->', producer.subregion?.map(s => s.name).join(', ') || '')
     .replace('<!-- PRODUCER_MAP -->', producer.mapImageUrl || '')
     .replace('<!-- PRODUCER_INFO -->', producer.producerInfo || '')
     .replace('<!-- WINE_TABLE -->', tableHtml)
