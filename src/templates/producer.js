@@ -30,13 +30,32 @@ function getVisibleColumns(wines) {
     )
 }
 
-const WINE_TYPE_ICONS = [
-    white: `<span class="inline-block w-3 h-3 rounded-full bg-wine-white"></span>`,
-    macerated: `<span class="inline-block w-3 h-3 rounded-full bg-wine-macerated"></span>`,
-    rose: `<span class="inline-block w-3 h-3 rounded-full bg-wine-rose"></span>`,
-    red: `<span class="inline-block w-3 h-3 rounded-full bg-wine-red"></span>`,
+const WINE_TYPE_ICONS = {
+    white: 'assets/icons/white.svg',
+    macerated: 'assets/icons/macerated.svg',
+    rose: 'assets/icons/rose.svg',
+    red: 'assets/icons/red.svg',
 
-]
+}
+
+function renderWineTypeCell(wine) {
+    const iconPath = WINE_TYPE_ICONS[wine.wineType]
+    const colorIcon = iconPath
+    ? `<img src="${iconPath}" alt="${wine.wineType} class="w-2 h-2" />`
+    : ''
+
+    const sparklingIcon = wine.isSparkling
+    ? '<img src="assets/icons/sparkling.svg" alt="sparkling" class="w-3" />'
+    : ''
+
+    const fortifiedMark = wine.isFortified
+    ? '<span class="text-[10px] leading-none font-bold">%</span>'
+    : ''
+
+    return `<div class="flex items-center gap-1">${colorIcon}${sparklingIcon}${fortifiedMark}</div>`
+}
+
+
 
 function renderCell(wine, key) {
     const soldOut = wine.isSoldOut
