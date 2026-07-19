@@ -67,7 +67,7 @@ function renderCell(wine, key) {
     const strikeClass = soldOut ? `line-through opacity-50` : ''
 
     if (key === 'wineType') {
-        if (key === 'wineType') {
+        
             return renderWineTypeCell(wine)
     }
 
@@ -115,7 +115,7 @@ function renderCell(wine, key) {
 
       return `<span class="${strikeClass}">${wine[key] ?? ''}</span>`
 }
-}
+
 
 function renderTable (wines) {
     const columns = getVisibleColumns(wines)
