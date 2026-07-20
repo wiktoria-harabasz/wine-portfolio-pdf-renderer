@@ -812,6 +812,7 @@ body {
   page-break-after: always;
   -moz-column-break-after: page;
        break-after: page;
+  padding: 40px;
 }
 
 tr {

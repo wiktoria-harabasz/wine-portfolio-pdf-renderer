@@ -87,6 +87,7 @@
     box-sizing: border-box;
     page-break-after: always;
     break-after: page;
+    padding: 40px;
 
   }
 
