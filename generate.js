@@ -41,5 +41,8 @@ async function generate(producerId) {
   console.log('PDF exported to', pdfPath)
 }
 
-generate('2335b2fa-554d-4497-b253-1dec7d033c9f')
-// generate('52b54374-90ad-4548-9741-490abba77cc7')
+// generate('2335b2fa-554d-4497-b253-1dec7d033c9f') Diwald
+generate('c7a54483-1eb5-4c05-a42d-6b58e151c873')
+
+// generate('52b54374-90ad-4548-9741-490abba77cc7') Champagne Nakada
+

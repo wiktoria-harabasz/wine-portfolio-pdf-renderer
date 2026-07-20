@@ -93,7 +93,7 @@ function renderCell(wine, key) {
 
     if (key === 'bottleSize') {
        if (wine.isMagnumBottle) return '1.5L'
-        if (wine.isSmallBottle) return '1/2 0.375L'
+        if (wine.isSmallBottle) return '1/2'
         return ''
     }
 
@@ -106,8 +106,12 @@ function renderCell(wine, key) {
         } else if (wine.isBackInStock) {
             statusHtml = `<div class="text-green-600 text-xs font-bold">Back in Stock!</div>`
         }
-        return `<span class="font-bold ${strikeClass}">${wine.wineName}</span>${statusHtml}`
-        
+    
+        const subNameHtml = wine.wineSubName
+            ? `<div class="text-xs text-muted ${strikeClass}">${wine.wineSubName}</div>`
+            : ''
+    
+        return `<span class="font-bold ${strikeClass}">${wine.wineName}</span>${statusHtml}${subNameHtml}`
     }
 
     if (key === 'price') {

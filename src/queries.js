@@ -6,7 +6,8 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     producerInfo,
     "mapImageUrl": mapImage.asset->url,
      "wines": *[_type == "wine" && producer._ref == ^._id]{
-      wineName,
+    wineName,
+    wineSubName,
     wineType,
     vintage,
     price,
@@ -22,6 +23,7 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     isSmallBottle,
     isMagnumBottle,
     isNew,
+    isBackInStock,
     isSoldOut,
     isAllocationOnly
     }
