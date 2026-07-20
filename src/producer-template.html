@@ -1,20 +1,22 @@
 
-    <div class="bg-champagne font-body font-weight-600 page" id="producer-<!-- PRODUCER_SLUG -->">
+    <div class="bg-champagne font-body font-weight-600 page flex flex-col justify-between h-full" id="producer-<!-- PRODUCER_SLUG -->">
+        <div>
         <div class="flex flex-row justify-between w-full items-center mb-8 ">
 
             <a href="#index" class="flex flex-row gap-2 items-center text-button">
+
+                <!-- Header: Button and pagination -->
             
                 <img src="assets/icons/arrow.svg" class="w-2 h-2" />
                 Powrót do Spisu Treści
             </a>
 
-            <div class="text-body"><!-- PRODUCER_PAGE_NUMBER --> / <!-- PRODUCER_TOTAL_PAGES --></div>
-
+            <div class="text-body font-semibold text-off-black"><!-- PRODUCER_PAGE_NUMBER --> / <!-- PRODUCER_TOTAL_PAGES --></div>
 
         </div>
 
 
-
+        
         <div class="flex flex-row align-top gap-4 mb-8">
             <div class="text-h1 uppercase"><!-- PRODUCER_NAME --></div> 
             <div class="text-subheading-number ">(01)</div>
@@ -39,13 +41,14 @@
         <p class="text-body text-justify ">
            <!-- PRODUCER_INFO -->
         </p>
-
+        <div class="mt-8">
         <!-- Table -->
          <!-- WINE_TABLE -->
+        </div>
          
-
+        </div>
         <!-- Footer -->
-        <div class="flex flex-row justify-between items-center w-full mt-64">
+        <div class="flex flex-row justify-between items-end w-full ">
             <!-- Legend -->
             <div class="flex flex-row items-center gap-4 ">
                 <div class="flex flex-row gap-2 items-center">

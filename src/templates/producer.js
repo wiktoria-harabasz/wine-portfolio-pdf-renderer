@@ -47,7 +47,7 @@ const WINE_TYPE_ICONS = {
 function renderWineTypeCell(wine) {
     const iconPath = WINE_TYPE_ICONS[wine.wineType]
     const colorIcon = iconPath
-    ? `<img src="${iconPath}" alt="${wine.wineType}" class="w-2 h-2" />`
+    ? `<img src="${iconPath}" alt="${wine.wineType}" class="w-3 h-3" />`
     : ''
 
     const sparklingIcon = wine.isSparkling
@@ -122,15 +122,15 @@ function renderTable (wines) {
     const columns = getVisibleColumns(wines)
 
     const headerHtml = columns
-    .map(col => `<th class="text-left font-semibold px-3 py-2 border-r border-ink/10 last:border-r-0">${col.label}</th>`)
+    .map(col => `<th class="text-left font-semibold px-2 py-1 border-r border-off-black bg-red-500 last:border-r-0">${col.label}</th>`)
     .join('')
 
     const rowsHtml = wines 
     .map(wine => {
         const cellsHtml = columns
-        .map(col => `<td class="px-3 py-2 align-top border-r border-ink/10 last:border-r-0">${renderCell(wine, col.key)}</td>`)
+        .map(col => `<td class="px-2 py-1 align-top border-r border-off-black bg-yellow-500 last:border-r-0">${renderCell(wine, col.key)}</td>`)
         .join('')
-    return `<tr class="border-t border-ink/10">${cellsHtml}</tr>`
+    return `<tr class="bg-green-500 border-t border-solid border-off-black">${cellsHtml}</tr>`
 
     })
     .join('')
