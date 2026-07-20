@@ -158,6 +158,8 @@ function renderProducerPage(producer) {
       .replace('<!-- PRODUCER_MAP -->', producer.mapImageUrl || '')
       .replace('<!-- PRODUCER_INFO -->', producer.producerInfo || '')
       .replace('<!-- WINE_TABLE -->', tableHtml)
+      .replace('<!-- PRODUCER_PAGE_NUMBER -->', producer.pageNumber)
+        .replace('<!-- PRODUCER_TOTAL_PAGES -->', producer.totalPages)
   }
 
 module.exports = { renderTable, renderProducerPage }

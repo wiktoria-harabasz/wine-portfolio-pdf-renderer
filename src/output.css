@@ -562,8 +562,8 @@ video {
   margin-bottom: 2rem;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
+.ml-4 {
+  margin-left: 1rem;
 }
 
 .mt-64 {
@@ -642,8 +642,8 @@ video {
   gap: 1rem;
 }
 
-.border-b {
-  border-bottom-width: 1px;
+.gap-8 {
+  gap: 2rem;
 }
 
 .border-r {
@@ -667,11 +667,6 @@ video {
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-}
-
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
 }
 
 .py-12 {
@@ -700,20 +695,6 @@ video {
   font-family: TWK Lausanne, sans-serif;
 }
 
-.font-display {
-  font-family: TWK Lausanne, sans-serif;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -740,9 +721,19 @@ video {
   text-transform: capitalize;
 }
 
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity, 1));
+}
+
 .text-muted {
   --tw-text-opacity: 1;
   color: rgb(160 163 171 / var(--tw-text-opacity, 1));
+}
+
+.text-off-black {
+  --tw-text-opacity: 1;
+  color: rgb(20 10 10 / var(--tw-text-opacity, 1));
 }
 
 .no-underline {
@@ -823,3 +814,5 @@ tr {
 .last\:border-r-0:last-child {
   border-right-width: 0px;
 }
+
+
