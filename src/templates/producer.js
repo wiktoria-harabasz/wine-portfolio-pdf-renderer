@@ -13,7 +13,6 @@ const ALL_COLUMNS = [
     { key: 'base', label: 'Base' },
     { key: 'isSansSulfite', label: '' }, // boolean, show "sans sulfite" if true
     { key: 'isAllocationOnly', label: '' }, // boolean, show "Allocation Only!" if true
-    { key: 'bottleSize', label: '' }, // Magnum or 0.375L
     { key: 'price', label: 'Price' },
     
 ]
@@ -47,25 +46,32 @@ const WINE_TYPE_ICONS = {
 function renderWineTypeCell(wine) {
     const iconPath = WINE_TYPE_ICONS[wine.wineType]
     const colorIcon = iconPath
-    ? `<img src="${iconPath}" alt="${wine.wineType}" class="w-3 h-3" />`
+    ? `<img src="${iconPath}" alt="${wine.wineType}" class="w-[11px] h-[11px]" />`
     : ''
 
     const sparklingIcon = wine.isSparkling
-    ? '<img src="assets/icons/sparkling.svg" alt="sparkling" class="w-3" />'
+    ? '<img src="assets/icons/sparkling.svg" alt="sparkling" class="w-[10px] h-[10px]" />'
     : ''
 
     const fortifiedMark = wine.isFortified
     ? '<span class="text-[10px] leading-none font-bold">%</span>'
     : ''
 
-    return `<div class="flex items-center gap-1">${colorIcon}${sparklingIcon}${fortifiedMark}</div>`
+    let bottleSizeIcon = ''
+    if (wine.isMagnumBottle) {
+        bottleSizeIcon = '<span class="text-[10px] font-semibold">1.5L</span>'
+    } else if (wine.isSmallBottle) {
+        bottleSizeIcon = '<span class="text-[10px] font-semibold">1/2</span>'
+    }
+
+    return `<div class="flex items-center gap-2">${colorIcon}${sparklingIcon}${fortifiedMark}</div>`
 }
 
 
 
 function renderCell(wine, key) {
     const soldOut = wine.isSoldOut
-    const strikeClass = soldOut ? `line-through opacity-50` : ''
+    const strikeClass = soldOut ? `line-through text-muted` : ''
 
     if (key === 'wineType') {
         
@@ -91,31 +97,33 @@ function renderCell(wine, key) {
         : ''
     }
 
-    if (key === 'bottleSize') {
-       if (wine.isMagnumBottle) return '1.5L'
-        if (wine.isSmallBottle) return '1/2'
-        return ''
-    }
+
 
     if (key === 'wineName') {
         let statusHtml = ''
         if (soldOut) {
-            statusHtml = `<span class="text-red-600 font-bold ml-2">SOLD OUT!</span>`
+            statusHtml = `<span class="inline-flex text-status-soldout text-[10px] font-semibold">SOLD OUT!</span>`
         } else if (wine.isNew) {
-            statusHtml = `<div class="text-green-600 text-xs font-bold">New!</div>`
+            statusHtml = `<div class="inline-flex text-status-new text-[10px] font-semibold">NEW!</div>`
         } else if (wine.isBackInStock) {
-            statusHtml = `<div class="text-green-600 text-xs font-bold">Back in Stock!</div>`
+            statusHtml = `<div class="inline-flex text-status-backinstock text-[10px] font-semibold">BACK IN STOCK!</div>`
         }
     
         const subNameHtml = wine.wineSubName
-            ? `<div class="text-xs text-muted ${strikeClass}">${wine.wineSubName}</div>`
+            ? `<div class="text-xs flex text-off-black ${strikeClass}">${wine.wineSubName}</div>`
             : ''
     
-        return `<span class="font-bold ${strikeClass}">${wine.wineName}</span>${statusHtml}${subNameHtml}`
+        return `<span class="font-semibold mr-1 ${strikeClass}">${wine.wineName}</span>${statusHtml}${subNameHtml}`
     }
 
     if (key === 'price') {
-        return `<span class="font-bold ${strikeClass}">${wine.price} PLN</span>`
+        return `<span class="font-semibold text-nowrap ${strikeClass}">${wine.price} PLN</span>`
+    }
+
+    if (key === 'sugar') {
+        return wine.sugar
+            ? `<span class=" ${strikeClass}">${wine.sugar} g/l</span>`
+            : ''
     }
 
       return `<span class="${strikeClass}">${wine[key] ?? ''}</span>`
@@ -126,21 +134,24 @@ function renderTable (wines) {
     const columns = getVisibleColumns(wines)
 
     const headerHtml = columns
-    .map(col => `<th class="text-left font-semibold px-2 py-1 border-r border-off-black bg-red-500 last:border-r-0">${col.label}</th>`)
+    .map(col => `<th class="text-left font-semibold text-nowrap ">${
+      col.label ? `<span class="flex rounded-sm bg-off-black text-champagne px-2 py-0.5">${col.label}</span>` : ''
+    }</th>`)
     .join('')
 
     const rowsHtml = wines 
     .map(wine => {
         const cellsHtml = columns
-        .map(col => `<td class="px-2 py-1 align-top border-r border-off-black bg-yellow-500 last:border-r-0">${renderCell(wine, col.key)}</td>`)
+        .map(col => `<td class="px-2 py-2 align-top border-off-black first:pl-0">${renderCell(wine, col.key)}</td>`)
         .join('')
-    return `<tr class="bg-green-500 border-t border-solid border-off-black">${cellsHtml}</tr>`
+    return `<tr class="border-b-[0.5px] border-solid border-off-black">${cellsHtml}</tr>`
 
     })
     .join('')
 
+
     return `
-    <table class="w-full border-collapse font-body text-sm">
+    <table class="w-full border-collapse font-body text-xs">
       <thead>
         <tr class="text-muted uppercase text-xs">${headerHtml}</tr>
       </thead>
@@ -153,17 +164,20 @@ function renderTable (wines) {
 function renderProducerPage(producer) {
     const tableHtml = renderTable(producer.wines)
     const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
+    const subregionHtml = producer.subregion?.length
+    ? producer.subregion.map(s => `<div class="flex items-center text-h3 flex-row gap-2"><img src="/img/star_icon.svg" class="w-4 h-4" />${s.name}</div>`).join('')
+    : ''
     return template
       .replace('<!-- PRODUCER_NAME -->', producer.producerName)
       .replace('<!-- PRODUCER_SLUG -->', producer.slug || producer._id)
       .replace('<!-- PRODUCER_COUNTRY -->', producer.country || '')
       .replace('<!-- PRODUCER_REGION -->', producer.region?.name || '')
-      .replace('<!-- PRODUCER_SUBREGION -->', producer.subregion?.map(s => s.name).join(', ') || '')
+      .replace('<!-- PRODUCER_SUBREGION -->', subregionHtml)
       .replace('<!-- PRODUCER_MAP -->', producer.mapImageUrl || '')
       .replace('<!-- PRODUCER_INFO -->', producer.producerInfo || '')
       .replace('<!-- WINE_TABLE -->', tableHtml)
       .replace('<!-- PRODUCER_PAGE_NUMBER -->', producer.pageNumber)
-        .replace('<!-- PRODUCER_TOTAL_PAGES -->', producer.totalPages)
+    .replace('<!-- PRODUCER_TOTAL_PAGES -->', producer.totalPages)
   }
 
 module.exports = { renderTable, renderProducerPage }

@@ -35,14 +35,9 @@
     font-weight: 600;
   }
 
-  .text-legend {
-    font-size: 10px;
-    line-height: 14px;
-    font-weight: 300;
-  }
   .text-h1 {
-    font-size: 40px;
-    line-height: 48px;
+    font-size: 48px;
+    line-height: 56px;
     font-weight:600;
 
 
@@ -74,9 +69,9 @@
 
 
   .text-subheading-number {
-    font-size: 10px;
-    line-height: 14px;
-    font-weight: 300;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
   }
   
   
