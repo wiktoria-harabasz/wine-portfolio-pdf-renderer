@@ -139,28 +139,18 @@ function renderCell(wine, key, priceType) {
 function renderTable (wines, priceType) {
     const columns = getVisibleColumns(wines)
 
-    const rowsHtml = wines
-    .map(wine => {
-      const cellsHtml = columns
-        .map(col => `<td class="px-2 py-2 align-top border-off-black first:pl-0">${renderCell(wine, col.key, priceType)}</td>`)
-        .join('')
-      return `<tr class="border-b-[0.5px] border-solid border-off-black">${cellsHtml}</tr>`
-    })
-    .join('')
-
     const headerHtml = columns
-    .map(col => `<th class="text-left font-semibold text-nowrap ">${
+    .map(col => `<th class="text-left font-semibold text-nowrap text-off-black">${
       col.label ? `<span class="flex rounded-sm bg-off-black text-champagne px-2 py-0.5">${col.label}</span>` : ''
     }</th>`)
     .join('')
 
-    const rowsHtml = wines 
+  const rowsHtml = wines
     .map(wine => {
-        const cellsHtml = columns
-        .map(col => `<td class="px-2 py-2 align-top border-off-black first:pl-0">${renderCell(wine, col.key)}</td>`)
+      const cellsHtml = columns
+        .map(col => `<td class="px-2 py-2 align-top border-off-black first:pl-0">${renderCell(wine, col.key, priceType)}</td>`)
         .join('')
-    return `<tr class="border-b-[0.5px] border-solid border-off-black">${cellsHtml}</tr>`
-
+      return `<tr class="border-t border-ink/10">${cellsHtml}</tr>`
     })
     .join('')
 

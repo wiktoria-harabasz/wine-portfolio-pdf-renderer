@@ -6,10 +6,8 @@ const { renderIndexPage } = require('./src/templates/index')
 const client = require('./src/sanity-client')
 const { PRODUCER_QUERY, ALL_PRODUCERS_QUERY } = require('./src/queries')
 
-async function generateFullPortfolio() {
+async function generateFullPortfolio(priceType) {
     const producers = await client.fetch(ALL_PRODUCERS_QUERY)
-  
-    // Page 1 = index. Each producer gets the next page number, in order.
     const producersWithPageNumbers = producers.map((p, i) => ({ ...p, pageNumber: i + 2 }))
     const totalPages = producers.length + 1
   
@@ -17,25 +15,26 @@ async function generateFullPortfolio() {
   
     for (const p of producersWithPageNumbers) {
       const full = await client.fetch(PRODUCER_QUERY, { id: p._id })
-      const pageHtml = renderProducerPage({ ...full, slug: p.slug, pageNumber: p.pageNumber, totalPages })
+      const pageHtml = renderProducerPage({ ...full, slug: p.slug, pageNumber: p.pageNumber, totalPages }, priceType)
       allPagesHtml += pageHtml
     }
   
     const shell = fs.readFileSync('./src/portfolio-shell.html', 'utf-8')
     const finalHtml = shell.replace('{{CONTENT}}', allPagesHtml)
   
-    fs.writeFileSync('./src/full-portfolio.html', finalHtml)
-    console.log(`Built full-portfolio.html with ${producers.length} producers`)
+    const outputHtmlPath = `./src/full-portfolio-${priceType}.html`
+    fs.writeFileSync(outputHtmlPath, finalHtml)
+    console.log(`Built ${outputHtmlPath} with ${producers.length} producers`)
   
     if (!fs.existsSync('output')) fs.mkdirSync('output')
   
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(`file://${path.resolve(__dirname, 'src/full-portfolio.html')}`, { waitUntil: 'networkidle0' })
+    await page.goto(`file://${path.resolve(__dirname, outputHtmlPath)}`, { waitUntil: 'networkidle0' })
     await page.emulateMediaType('print')
   
     await page.pdf({
-      path: 'output/full-portfolio.pdf',
+      path: `output/full-portfolio-${priceType}.pdf`,
       format: 'A4',
       printBackground: true,
       displayHeaderFooter: true,
@@ -49,9 +48,12 @@ async function generateFullPortfolio() {
     })
   
     await browser.close()
-    console.log('PDF exported to output/full-portfolio.pdf')
+    console.log(`PDF exported to output/full-portfolio-${priceType}.pdf`)
   }
   
-
-
-generateFullPortfolio()
+  async function generateBoth() {
+    await generateFullPortfolio('b2c')
+    await generateFullPortfolio('horeca')
+  }
+  
+  generateBoth()
