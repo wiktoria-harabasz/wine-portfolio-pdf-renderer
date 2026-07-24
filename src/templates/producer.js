@@ -69,9 +69,15 @@ function renderWineTypeCell(wine) {
 
 
 
-function renderCell(wine, key) {
+function renderCell(wine, key, priceType) {
     const soldOut = wine.isSoldOut
     const strikeClass = soldOut ? `line-through text-muted` : ''
+
+    if (key === 'price') {
+        const value = priceType === 'horeca' ? wine.priceHoreca : wine.pricePrivate
+        if (!value) return ''
+        return `<span class="font-semibold ${strikeClass}">${value} PLN</span>`
+    }
 
     if (key === 'wineType') {
         
@@ -130,8 +136,17 @@ function renderCell(wine, key) {
 }
 
 
-function renderTable (wines) {
+function renderTable (wines, priceType) {
     const columns = getVisibleColumns(wines)
+
+    const rowsHtml = wines
+    .map(wine => {
+      const cellsHtml = columns
+        .map(col => `<td class="px-2 py-2 align-top border-off-black first:pl-0">${renderCell(wine, col.key, priceType)}</td>`)
+        .join('')
+      return `<tr class="border-b-[0.5px] border-solid border-off-black">${cellsHtml}</tr>`
+    })
+    .join('')
 
     const headerHtml = columns
     .map(col => `<th class="text-left font-semibold text-nowrap ">${
@@ -161,8 +176,8 @@ function renderTable (wines) {
 
 }
 
-function renderProducerPage(producer) {
-    const tableHtml = renderTable(producer.wines)
+function renderProducerPage(producer, priceType) {
+    const tableHtml = renderTable(producer.wines, priceType)
     const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
     const subregionHtml = producer.subregion?.length
     ? producer.subregion.map(s => `<div class="flex items-center text-h3 flex-row gap-2"><img src="/img/star_icon.svg" class="w-4 h-4" />${s.name}</div>`).join('')
