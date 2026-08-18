@@ -26,6 +26,7 @@ function hasValue(val) {
 
 const COLUMN_VALUE_GETTERS = {
     bottleSize: (wine) => wine.isSmallBottle || wine.isMagnumBottle,
+    price: (wine) => wine.pricePrivate || wine.priceHoreca,
   }
 
   function getVisibleColumns(wines) {
@@ -123,7 +124,9 @@ function renderCell(wine, key, priceType) {
     }
 
     if (key === 'price') {
-        return `<span class="font-semibold text-nowrap ${strikeClass}">${wine.price} PLN</span>`
+        const value = priceType === 'horeca' ? wine.priceHoreca : wine.pricePrivate
+        if (!value) return ''
+        return `<span class="font-semibold text-nowrap ${strikeClass}">${value} PLN</span>`
     }
 
     if (key === 'sugar') {
@@ -183,6 +186,7 @@ function renderProducerPage(producer, priceType) {
       .replace('<!-- WINE_TABLE -->', tableHtml)
       .replace('<!-- PRODUCER_PAGE_NUMBER -->', producer.pageNumber)
     .replace('<!-- PRODUCER_TOTAL_PAGES -->', producer.totalPages)
+    .replace('<!-- PRODUCER_NUMBER -->', String(producer.producerNumber).padStart(2, '0'))
   }
 
 module.exports = { renderTable, renderProducerPage }

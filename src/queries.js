@@ -26,7 +26,8 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     isNew,
     isBackInStock,
     isSoldOut,
-    isAllocationOnly
+    isAllocationOnly,
+    isSansSulfite
     }
   }`
 
