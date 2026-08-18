@@ -189,4 +189,4 @@ function renderProducerPage(producer, priceType) {
     .replace('<!-- PRODUCER_NUMBER -->', String(producer.producerNumber).padStart(2, '0'))
   }
 
-module.exports = { renderTable, renderProducerPage }
+module.exports = { renderTable, renderProducerPage, renderWineTypeCell }
