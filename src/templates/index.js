@@ -2,18 +2,23 @@
 function renderProducerRow(p) {
     return `
       <li>
-        <a href="#producer-${p.slug}" class="flex items-center justify-between gap-2 text-ink no-underline">
+        <a href="#producer-${p.slug}" class="flex items-center justify-between gap-2 text-off-black no-underline">
+        <div class="flex flex-row items-start gap-2">
+          <span class="font-semibold text-off-black text-[10px]">(${String(p.producerNumber).padStart(2, '0')})</span>
+
           <span class="uppercase font-semibold">${p.producerName}</span>
+          </div>
           <span class="text-muted text-sm">${p.pageNumber}</span>
         </a>
       </li>
     `
   }
+
   
   function renderRegionSection(region, producers) {
     return `
       <div class="index-region flex flex-col gap-4">
-        <h4 class="index-region-title capitalize ml-4 text-gray-400">${region}</h4>
+        <h4 class="index-region-title capitalize ml-4 text-off-black">//<span class="ml-1">${region}</span></h4>
         <ul class="index-producers flex flex-col gap-4 ml-4 text-off-black">
           ${producers.map(renderProducerRow).join('')}
         </ul>
