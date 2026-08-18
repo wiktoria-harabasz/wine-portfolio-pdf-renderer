@@ -8,14 +8,14 @@ const { PRODUCER_QUERY, ALL_PRODUCERS_QUERY } = require('./src/queries')
 
 async function generateFullPortfolio(priceType) {
     const producers = await client.fetch(ALL_PRODUCERS_QUERY)
-    const producersWithPageNumbers = producers.map((p, i) => ({ ...p, pageNumber: i + 2 }))
+    const producersWithPageNumbers = producers.map((p, i) => ({ ...p, pageNumber: i + 2, producerNumber: i + 1 }))
     const totalPages = producers.length + 1
   
     let allPagesHtml = renderIndexPage(producersWithPageNumbers, totalPages)
   
     for (const p of producersWithPageNumbers) {
       const full = await client.fetch(PRODUCER_QUERY, { id: p._id })
-      const pageHtml = renderProducerPage({ ...full, slug: p.slug, pageNumber: p.pageNumber, totalPages }, priceType)
+      const pageHtml = renderProducerPage({ ...full, slug: p.slug, pageNumber: p.pageNumber, totalPages, producerNumber: p.producerNumber }, priceType)
       allPagesHtml += pageHtml
     }
   
@@ -23,7 +23,7 @@ async function generateFullPortfolio(priceType) {
     const finalHtml = shell.replace('{{CONTENT}}', allPagesHtml)
   
     const outputHtmlPath = `./src/full-portfolio-${priceType}.html`
-    fs.writeFileSync(outputHtmlPath, finalHtml)
+    fs.writeFileSync(`./src/full-portfolio-${priceType}.html`, finalHtml)
     console.log(`Built ${outputHtmlPath} with ${producers.length} producers`)
   
     if (!fs.existsSync('output')) fs.mkdirSync('output')
@@ -55,5 +55,7 @@ async function generateFullPortfolio(priceType) {
     await generateFullPortfolio('b2c')
     await generateFullPortfolio('horeca')
   }
+
+  
   
   generateBoth()
