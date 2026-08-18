@@ -38,6 +38,40 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     region->{name},
     "slug": slug.current
   }`
+
+const ALL_WINES_QUERY = `*[_type == "wine"] | order(producer->country asc, producer->region->name asc, producer->producerName asc){
+  _id,
+  wineName,
+  "slug": slug.current,
+  "producerName": producer->producerName,
+  "producerSlug": producer->slug.current,
+  "country": producer->country,
+  "region": producer->region->name,
+  wineType,
+  vintage
+}`
+
+const WINE_SPEC_QUERY = `*[_type == "wine" && _id == $id][0]{
+  wineName,
+  wineSubName,
+  vintage,
+  vintageReport,
+  wineType,
+  isSparkling,
+  isFortified,
+  isMagnumBottle,
+  isSmallBottle,
+  "bottleImageUrl": bottleImage.asset->url,
+  "producerName": producer->producerName,
+  "country": producer->country,
+  "region": producer->region->name,
+  "subregion": producer->subregion[]->name,
+  grapeVariety[]->{name},
+  classification,
+  terroir,
+  wineMaking,
+  tastingNotes
+}`
   
   
-  module.exports = { PRODUCER_QUERY, ALL_PRODUCERS_QUERY }
+  module.exports = { PRODUCER_QUERY, ALL_PRODUCERS_QUERY, ALL_WINES_QUERY, WINE_SPEC_QUERY }
