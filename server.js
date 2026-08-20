@@ -25,3 +25,19 @@ app.get('/export/full/:priceType', async (req, res) => {
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => console.log(`Export server running on port ${PORT}`))
+
+const { renderWineDatabasePdf } = require('./src/render-winedb')
+
+app.get('/export/winedb', async (req, res) => {
+  try {
+    const pdfBuffer = await renderWineDatabasePdf()
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename="wine-database.pdf"',
+    })
+    res.send(pdfBuffer)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Export failed')
+  }
+})
