@@ -3,7 +3,7 @@ const cors = require('cors')
 const { renderPortfolioPdf } = require('./src/render-portfolio')
 
 const app = express()
-app.use(cors())
+app.use(cors({ origin: 'https://nowofalowi-portfolio.sanity.studio' }))
 
 app.get('/export/full/:priceType', async (req, res) => {
   const { priceType } = req.params
@@ -41,3 +41,4 @@ app.get('/export/winedb', async (req, res) => {
     res.status(500).send('Export failed')
   }
 })
+
