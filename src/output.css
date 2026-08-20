@@ -606,10 +606,6 @@ video {
   margin-top: 16rem;
 }
 
-.ml-8 {
-  margin-left: 2rem;
-}
-
 .flex {
   display: flex;
 }
@@ -654,14 +650,6 @@ video {
   height: 100%;
 }
 
-.h-\[6px\] {
-  height: 6px;
-}
-
-.h-1 {
-  height: 0.25rem;
-}
-
 .w-2 {
   width: 0.5rem;
 }
@@ -698,14 +686,6 @@ video {
   width: 100%;
 }
 
-.w-\[6px\] {
-  width: 6px;
-}
-
-.w-1 {
-  width: 0.25rem;
-}
-
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -716,42 +696,6 @@ video {
 
 .grid-cols-\[1fr_auto\] {
   grid-template-columns: 1fr auto;
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.grid-cols-\[auto_auto_1fr\] {
-  grid-template-columns: auto auto 1fr;
-}
-
-.grid-cols-\[1fr_1fr_1fr\] {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-cols-\[200px_1fr\] {
-  grid-template-columns: 200px 1fr;
-}
-
-.grid-cols-\[100px_1fr\] {
-  grid-template-columns: 100px 1fr;
-}
-
-.grid-cols-\[auto_1fr\] {
-  grid-template-columns: auto 1fr;
-}
-
-.grid-cols-\[25\%_75\%\] {
-  grid-template-columns: 25% 75%;
 }
 
 .grid-cols-\[25\%_25\%_50\%\] {
@@ -776,10 +720,6 @@ video {
 
 .items-center {
   align-items: center;
-}
-
-.items-baseline {
-  align-items: baseline;
 }
 
 .justify-between {
@@ -822,20 +762,12 @@ video {
   text-wrap: nowrap;
 }
 
-.rounded-sm {
-  border-radius: 0.125rem;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
 .rounded {
   border-radius: 0.25rem;
 }
 
-.border {
-  border-width: 1px;
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
 .border-b-\[0\.5px\] {
@@ -850,25 +782,13 @@ video {
   border-top-width: 1px;
 }
 
-.border-b {
-  border-bottom-width: 1px;
-}
-
 .border-solid {
   border-style: solid;
-}
-
-.border-dotted {
-  border-style: dotted;
 }
 
 .border-off-black {
   --tw-border-opacity: 1;
   border-color: rgb(20 10 10 / var(--tw-border-opacity, 1));
-}
-
-.border-transparent {
-  border-color: transparent;
 }
 
 .bg-champagne {
@@ -911,10 +831,6 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pl-2 {
-  padding-left: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -943,11 +859,6 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 
 .font-bold {
@@ -1012,6 +923,22 @@ video {
   size: A4;
 
   margin: 0;
+}
+
+@font-face {
+  font-family: 'TWKLausanne';
+
+  src: url('assets/fonts/TWKLausanne-600.woff2') format('woff2');
+
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'TWKLausanne';
+
+  src: url('assets/fonts/TWKLausanne-300.woff2') format('woff2');
+
+  font-weight: 300;
 }
 
 body {
