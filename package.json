@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "live-server src",
-    "build-css": "tailwindcss -i ./src/print.css -o ./src/output.css --watch"
+    "build-css": "tailwindcss -i ./src/print.css -o ./src/output.css --watch",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
