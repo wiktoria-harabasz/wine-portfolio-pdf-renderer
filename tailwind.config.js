@@ -17,8 +17,8 @@ module.exports = {
         'wine-red': '#B51800',
       },
       fontFamily: {
-        display: ['TWK Lausanne', 'sans-serif'],
-        body: ['TWK Lausanne', 'sans-serif'],
+        display: ['TWKLausanne', 'sans-serif'],
+        body: ['TWKLausanne', 'sans-serif'],
       },
     },
   },
