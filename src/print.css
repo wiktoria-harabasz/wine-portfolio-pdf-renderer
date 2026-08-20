@@ -91,3 +91,12 @@
   }
 
 
+  .index-grid-wines {
+    display: grid;
+    grid-template-columns: max-content max-content max-content 1fr max-content;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    align-items: baseline;
+  }
+
+
