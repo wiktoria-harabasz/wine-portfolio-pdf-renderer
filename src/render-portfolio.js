@@ -16,7 +16,6 @@ async function buildPortfolioHtml(priceType) {
     const visibleWines = full.wines.filter(w =>
       priceType === 'horeca' ? !w.hideFromHoreca : !w.hideFromPrivate
     )
-    if (visibleWines.length === 0) continue // drop from the list entirely, before numbering
     producersWithVisibleWines.push({ ...full, slug: p.slug, wines: visibleWines })
   }
 
