@@ -37,14 +37,23 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     }
   }`
 
-  const ALL_PRODUCERS_QUERY = `*[_type == "producer"] | order(country asc, region->name asc, producerName asc){
-    _id,
-    producerName,
-    isNewInPortfolio,
-    country,
-    region->{name},
-    "slug": slug.current
-  }`
+  const ALL_PRODUCERS_QUERY = `*[_type == "producer"]{
+  _id,
+  producerName,
+  isNewInPortfolio,
+  country,
+  region->{name},
+  "slug": slug.current,
+  "countryOrder": select(
+    country == "France" => 0,
+    country == "Austria" => 1,
+    country == "Germany" => 2,
+    country == "Hungary" => 3,
+    country == "Italy" => 4,
+    country == "Usa" => 5,
+    true => 99
+  )
+} | order(countryOrder asc, region.name asc, producerName asc)`
 
 const ALL_WINES_QUERY = `*[_type == "wine"] | order(producer->country asc, producer->region->name asc, producer->producerName asc){
   _id,
