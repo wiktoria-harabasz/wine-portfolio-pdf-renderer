@@ -71,7 +71,8 @@ function renderWineTypeCell(wine) {
 
 
 function renderCell(wine, key, priceType) {
-    const soldOut = wine.isSoldOut
+    const portfolioSoldOut = priceType === 'horeca' ? wine.isSoldOutHoreca : wine.isSoldOutPrivate
+    const soldOut = wine.isSoldOut || portfolioSoldOut
     const strikeClass = soldOut ? `line-through text-muted` : ''
 
     if (key === 'price') {
