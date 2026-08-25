@@ -758,6 +758,10 @@ video {
   row-gap: 1rem;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .text-nowrap {
   text-wrap: nowrap;
 }
@@ -914,6 +918,11 @@ video {
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(22 163 74 / var(--tw-text-opacity, 1));
+}
+
+.text-status-new {
+  --tw-text-opacity: 1;
+  color: rgb(35 196 124 / var(--tw-text-opacity, 1));
 }
 
 .line-through {

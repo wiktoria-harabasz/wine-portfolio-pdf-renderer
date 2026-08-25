@@ -8,21 +8,35 @@ const { PRODUCER_QUERY, ALL_PRODUCERS_QUERY } = require('./queries')
 
 async function buildPortfolioHtml(priceType) {
   const producers = await client.fetch(ALL_PRODUCERS_QUERY)
-  const producersWithPageNumbers = producers.map((p, i) => ({ ...p, pageNumber: i + 2, producerNumber: i + 1 }))
-  const totalPages = producers.length + 1
 
-  let allPagesHtml = renderIndexPage(producersWithPageNumbers)
-
-  for (const p of producersWithPageNumbers) {
+  // Pass 1: fetch full data + filter wines per portfolio, drop empty producers entirely
+  const producersWithVisibleWines = []
+  for (const p of producers) {
     const full = await client.fetch(PRODUCER_QUERY, { id: p._id })
-    const visibleWines = full.wines.filter (w =>
-        priceType === 'horeca' ? !w.hideFromHoreca : !w.hideFromPrivate
+    const visibleWines = full.wines.filter(w =>
+      priceType === 'horeca' ? !w.hideFromHoreca : !w.hideFromPrivate
     )
+    if (visibleWines.length === 0) continue // drop from the list entirely, before numbering
+    producersWithVisibleWines.push({ ...full, slug: p.slug, wines: visibleWines })
+  }
 
-    if (visibleWines.length === 0) continue // skip producers with nothing to show
+   // Pass 2: NOW compute page/producer numbers, based on the already-filtered list
+   const numberedProducers = producersWithVisibleWines.map((p, i) => ({
+    ...p,
+    pageNumber: i + 2,
+    producerNumber: i + 1,
+  }))
+  const totalPages = numberedProducers.length + 1
 
-    const pageHtml = renderProducerPage({ 
-        ...full, wines: visibleWines, slug: p.slug, pageNumber: p.pageNumber, totalPages, producerNumber: p.producerNumber }, priceType)
+  // Pass 3: build index and pages from the SAME numbered, filtered list
+  let allPagesHtml = renderIndexPage(numberedProducers)
+
+
+  for (const p of numberedProducers) {
+    const pageHtml = renderProducerPage(
+      { ...p, totalPages },
+      priceType
+    )
     allPagesHtml += pageHtml
   }
 

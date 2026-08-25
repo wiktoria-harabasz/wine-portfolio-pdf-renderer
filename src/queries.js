@@ -37,9 +37,10 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     }
   }`
 
-  const ALL_PRODUCERS_QUERY = `*[_type == "producer"] | order(country asc, producerName asc){
+  const ALL_PRODUCERS_QUERY = `*[_type == "producer"] | order(country asc, region->name asc, producerName asc){
     _id,
     producerName,
+    isNewInPortfolio,
     country,
     region->{name},
     "slug": slug.current

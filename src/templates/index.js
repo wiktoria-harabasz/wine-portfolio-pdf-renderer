@@ -1,5 +1,20 @@
 
 function renderProducerRow(p) {
+  const newBadge = p.isNewInPortfolio
+    ? `<span class="text-[10px] font-bold text-green-600 uppercase ml-1">New</span>`
+    : ''
+  return `
+    <li>
+      <a href="#producer-${p.slug}" class="flex items-center justify-between gap-2 text-off-black no-underline">
+        <div class="flex flex-row items-start gap-2">
+          <span class="font-semibold text-off-black text-[10px]">(${String(p.producerNumber).padStart(2, '0')})</span>
+          <span class="uppercase font-semibold">${p.producerName}</span>
+          ${newBadge}
+        </div>
+        <span class="text-muted text-sm">${p.pageNumber}</span>
+      </a>
+    </li>
+  `
     return `
       <li>
         <a href="#producer-${p.slug}" class="flex items-center justify-between gap-2 text-off-black no-underline">
@@ -60,7 +75,7 @@ function renderProducerRow(p) {
         <h1 class="font-semibold uppercase text-h1 mb-8">spis treści</h1>
 
 
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-2">
           ${countriesHtml}
         </div>
       </div>
