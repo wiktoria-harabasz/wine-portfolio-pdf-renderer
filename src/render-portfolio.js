@@ -15,7 +15,14 @@ async function buildPortfolioHtml(priceType) {
 
   for (const p of producersWithPageNumbers) {
     const full = await client.fetch(PRODUCER_QUERY, { id: p._id })
-    const pageHtml = renderProducerPage({ ...full, slug: p.slug, pageNumber: p.pageNumber, totalPages, producerNumber: p.producerNumber }, priceType)
+    const visibleWines = full.wines.filter (w =>
+        priceType === 'horeca' ? !w.hideFromHoreca : !w.hideFromPrivate
+    )
+
+    if (visibleWines.length === 0) continue // skip producers with nothing to show
+
+    const pageHtml = renderProducerPage({ 
+        ...full, wines: visibleWines, slug: p.slug, pageNumber: p.pageNumber, totalPages, producerNumber: p.producerNumber }, priceType)
     allPagesHtml += pageHtml
   }
 
