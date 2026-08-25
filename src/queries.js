@@ -29,7 +29,7 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
         isBackInStock,
         isSoldOut,
         isAllocationOnly,
-        isSansSulfite
+        isSansSulfite,
         hideFromPrivate,
         hideFromHoreca,
         isSoldOutHoreca,
