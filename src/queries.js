@@ -1,5 +1,6 @@
 const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     producerName,
+    isNewInPortfolio,
     country,
     region->{name},
     subregion[]->{name},
@@ -8,6 +9,8 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
      "wines": *[_type == "wine" && producer._ref == ^._id]{
     wineName,
     wineSubName,
+    hideFromPrivate,
+    hideFromHoreca,
     wineType,
     vintage,
     pricePrivate,
@@ -24,8 +27,11 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     isSmallBottle,
     isMagnumBottle,
     isNew,
+    isNewVintage,
     isBackInStock,
     isSoldOut,
+    isSoldOutHoreca,
+    isSoldOutPrivate,
     isAllocationOnly,
     isSansSulfite
     }
@@ -55,7 +61,6 @@ const WINE_SPEC_QUERY = `*[_type == "wine" && _id == $id][0]{
   wineName,
   wineSubName,
   vintage,
-  vintageReport,
   wineType,
   isSparkling,
   isFortified,
@@ -68,6 +73,7 @@ const WINE_SPEC_QUERY = `*[_type == "wine" && _id == $id][0]{
   "subregion": producer->subregion[]->name,
   grapeVariety[]->{name},
   classification,
+  vintageReport,
   terroir,
   wineMaking,
   tastingNotes
