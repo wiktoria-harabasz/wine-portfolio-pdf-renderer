@@ -610,6 +610,10 @@ video {
   margin-top: 16rem;
 }
 
+.mt-\[2px\] {
+  margin-top: 2px;
+}
+
 .flex {
   display: flex;
 }
@@ -811,10 +815,6 @@ video {
 .bg-off-black {
   --tw-bg-opacity: 1;
   background-color: rgb(20 10 10 / var(--tw-bg-opacity, 1));
-}
-
-.p-0 {
-  padding: 0px;
 }
 
 .px-16 {
@@ -1105,6 +1105,10 @@ tr {
   position: relative;
 }
 
+.index-cell-region {
+  padding-right: 1rem;
+}
+
 .index-page-number {
   float: right;
 }
@@ -1112,7 +1116,9 @@ tr {
 .index-grid {
   display: grid;
   grid-template-columns: max-content max-content 1fr;
-  row-gap: 0.5rem;
+  row-gap: 0.25rem;
+  -moz-column-gap: 0.25rem;
+       column-gap: 0.25rem;
   align-items: center;
 }
 

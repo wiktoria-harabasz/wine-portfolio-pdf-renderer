@@ -144,10 +144,10 @@ function renderIndexRow(row) {
       <span class="index-cell-country font-semibold">${row.country}</span>
       <span class="index-cell-region font-semibold">${row.region}</span>
       <span class="index-cell-producer font-semibold">
-        <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row justify-between items-start">
           <div class="flex flex-row gap-2 items-start mr-8">
             <div class="producer-inner-number">(${String(p.producerNumber).padStart(2, '0')})</div>
-            <div>${p.producerName}${newBadge}</div>
+            <div class="flex flex-row items-center" mt-[2px]>${p.producerName}${newBadge}</div>
           </div>
           <div class="index-cell-page text-muted">${String(p.pageNumber).padStart(2, '0')}</div>
         </div>

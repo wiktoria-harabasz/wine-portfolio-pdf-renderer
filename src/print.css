@@ -188,13 +188,17 @@
     position: relative;
   }
   
+  .index-cell-region {
+    padding-right: 1rem;
+  }
   .index-page-number {
     float: right;
   }
   .index-grid {
     display: grid;
     grid-template-columns: max-content max-content 1fr;
-    row-gap: 0.5rem;
+    row-gap: 0.25rem;
+    column-gap: 0.25rem;
     align-items: center;
   }
   
