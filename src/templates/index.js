@@ -140,18 +140,17 @@ function renderIndexRow(row) {
     </span>`
     : ''
   return `
-    <a href="#producer-${p.slug}" class="index-row">
+    <a href="#producer-${p.slug}" class="index-row-link">
       <span class="index-cell-country font-semibold">${row.country}</span>
       <span class="index-cell-region font-semibold">${row.region}</span>
-      <span class="index-cell-producer flex items-center justify-between flex-row gap-2 font-semibold">
-       
+      <span class="index-cell-producer font-semibold">
+        <div class="flex flex-row justify-between items-center">
           <div class="flex flex-row gap-2 items-start mr-8">
             <div class="producer-inner-number">(${String(p.producerNumber).padStart(2, '0')})</div>
-            ${p.producerName}${newBadge}
+            <div>${p.producerName}${newBadge}</div>
           </div>
-        
-        <div class="index-cell-page text-muted text-sm p-0">${String(p.pageNumber).padStart(2, '0')}</div>
-
+          <div class="index-cell-page text-muted">${String(p.pageNumber).padStart(2, '0')}</div>
+        </div>
       </span>
     </a>
   `
