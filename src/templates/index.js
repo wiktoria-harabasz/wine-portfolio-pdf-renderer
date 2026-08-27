@@ -126,7 +126,7 @@ function chunkRowsIntoPages(rows, rowsPerPage = ROWS_PER_INDEX_PAGE) {
 function renderIndexRow(row) {
   const p = row.producer
   const newBadge = p.isNewInPortfolio
-    ? `<span class="status-badge-index">
+    ? `<span class="status-badge-index ml-2">
         <div class="flex flex-row gap-[2px]">
           <div class="badge-dot"></div>
           <div class="badge-dot"></div>

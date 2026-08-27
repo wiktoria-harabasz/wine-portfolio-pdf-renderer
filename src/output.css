@@ -582,8 +582,16 @@ video {
   margin-bottom: 2rem;
 }
 
+.ml-0 {
+  margin-left: 0px;
+}
+
 .ml-1 {
   margin-left: 0.25rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .ml-4 {
@@ -596,6 +604,10 @@ video {
 
 .mr-8 {
   margin-right: 2rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
 }
 
 .mt-4 {
@@ -1056,7 +1068,7 @@ tr {
   font-size: 12px!important;
   text-transform: uppercase;
   color: rgb(35, 196, 124, 1);
-  margin-left: 8px;
+  /* margin-left: 8px; */
   display:inline-flex;
   padding: 0!important;
   border-radius: 5px;
@@ -1100,13 +1112,20 @@ tr {
   opacity: 0.4;
 }
 
+.index-cell-country {
+  padding-left: 0.5rem;
+}
+
 .index-cell-producer {
   display: block;
   position: relative;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .index-cell-region {
   padding-right: 1rem;
+  padding-left: 0.5rem;
 }
 
 .index-page-number {

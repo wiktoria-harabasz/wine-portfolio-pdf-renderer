@@ -141,7 +141,7 @@
   font-size: 12px!important;
   text-transform: uppercase;
   color: rgb(35, 196, 124, 1);
-  margin-left: 8px;
+  /* margin-left: 8px; */
   display:inline-flex;
   padding: 0!important;
   border-radius: 5px;
@@ -183,13 +183,20 @@
     opacity: 0.4;
   }
 
+  .index-cell-country {
+    padding-left: 0.5rem;
+  }
+
   .index-cell-producer {
     display: block;
     position: relative;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   
   .index-cell-region {
     padding-right: 1rem;
+    padding-left: 0.5rem;
   }
   .index-page-number {
     float: right;

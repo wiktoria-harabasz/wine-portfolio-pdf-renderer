@@ -184,6 +184,22 @@ function renderProducerPage(producer, priceType) {
       .replace('<!-- PRODUCER_SUBREGION -->', subregionHtml)
       .replace('<!-- PRODUCER_MAP -->', producer.mapImageUrl || '')
       .replace('<!-- PRODUCER_INFO -->', producer.producerInfo || '')
+      .replace('<!-- PRODUCER_NEW_IN_PORTFOLIO_BADGE -->', producer.isNewInPortfolio
+        ? `
+        <span class="status-badge-index ml-0 whitespace-nowrap">
+          <div class="flex flex-row gap-[2px]">
+            <div class="badge-dot"></div>
+            <div class="badge-dot"></div>
+          </div>
+          New in portfolio
+          <div class="flex flex-row gap-[2px]">
+            <div class="badge-dot"></div>
+            <div class="badge-dot"></div>
+          </div>
+        </span>
+        `
+        : ''
+      )
       .replace('<!-- WINE_TABLE -->', tableHtml)
       .replace('<!-- PRODUCER_PAGE_NUMBER -->', producer.pageNumber)
     .replace('<!-- PRODUCER_TOTAL_PAGES -->', producer.totalPages)
