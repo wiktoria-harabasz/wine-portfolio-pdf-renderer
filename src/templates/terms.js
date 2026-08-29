@@ -1,8 +1,9 @@
 const { TERMS_CONTENT } = require('../content/terms')
 
 function renderTermsPage(pageNumber, totalPages, priceType) {
-    const content = TERMS_CONTENT[priceType] || TERMS_CONTENT.private
-    const paragraphs = TERMS_CONTENT
+  const content = TERMS_CONTENT[priceType] || TERMS_CONTENT.private
+
+  const paragraphs = content
     .trim()
     .split('\n\n')
     .filter(Boolean)
