@@ -646,6 +646,10 @@ video {
   margin-top: 2px;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .flex {
   display: flex;
 }
@@ -1037,6 +1041,10 @@ video {
 .text-status-red {
   --tw-text-opacity: 1;
   color: rgb(238 34 12 / var(--tw-text-opacity, 1));
+}
+
+.underline {
+  text-decoration-line: underline;
 }
 
 .line-through {

@@ -5,6 +5,7 @@ const { renderProducerPage } = require('./templates/producer')
 const { renderIndexPages, countIndexPages } = require('./templates/index')
 const client = require('./sanity-client')
 const { PRODUCER_QUERY, ALL_PRODUCERS_QUERY } = require('./queries')
+const { renderTermsPage } = require('./templates/terms')
 
 async function buildPortfolioHtml(priceType) {
     const producers = await client.fetch(ALL_PRODUCERS_QUERY)
@@ -23,7 +24,7 @@ async function buildPortfolioHtml(priceType) {
     const numberOfIndexPages = countIndexPages(producersWithVisibleWines)
   
     producersWithVisibleWines.forEach((p, i) => { p.pageNumber = numberOfIndexPages + 1 + i })
-    const totalPages = numberOfIndexPages + producersWithVisibleWines.length
+    const totalPages = numberOfIndexPages + producersWithVisibleWines.length + 1
   
     let allPagesHtml = renderIndexPages(producersWithVisibleWines)
   
@@ -31,6 +32,8 @@ async function buildPortfolioHtml(priceType) {
       const pageHtml = renderProducerPage({ ...p, totalPages }, priceType)
       allPagesHtml += pageHtml
     }
+
+    allPagesHtml += renderTermsPage(totalPages, totalPages)
   
     const shell = fs.readFileSync(path.join(__dirname, 'portfolio-shell.html'), 'utf-8')
     return shell.replace('{{CONTENT}}', allPagesHtml)

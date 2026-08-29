@@ -170,9 +170,15 @@ function renderIndexPages(producers) {
   const allRows = buildIndexRows(producers)
   const pages = chunkRowsIntoPages(allRows)
 
+  
+
   return pages.map((pageRows, i) => `
     <div class="page bg-champagne px-16 py-12 font-body" ${i === 0 ? 'id="index"' : ''}>
-      ${i === 0 ? '<h1 class="font-semibold text-h1 mb-8">Spis treści</h1>' : ''}
+      ${i === 0 ? `
+        <h1 class="font-semibold text-h1 mb-8">Spis treści</h1>
+        <a href="#terms" class="text-sm underline mb-8 inline-block">Warunki współpracy</a>
+        ` : ''}
+
       <div class="index-grid">
         ${renderIndexHeader()}
         ${pageRows.map(renderIndexRow).join('')}
