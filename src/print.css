@@ -217,3 +217,10 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+.text-muted {
+
+   color: #140a0a!important;
+   opacity: 0.4;
+
+  } 

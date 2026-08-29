@@ -149,7 +149,7 @@ function renderIndexRow(row) {
             <div class="producer-inner-number">(${String(p.producerNumber).padStart(2, '0')})</div>
             <div class="flex flex-row items-center" mt-[2px]>${p.producerName}${newBadge}</div>
           </div>
-          <div class="index-cell-page text-muted">${String(p.pageNumber).padStart(2, '0')}</div>
+          <div class="index-cell-page text-off-black opacity-40">${String(p.pageNumber).padStart(2, '0')}</div>
         </div>
       </span>
     </a>

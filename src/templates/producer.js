@@ -60,12 +60,12 @@ function renderWineTypeCell(wine) {
 
     let bottleSizeIcon = ''
     if (wine.isMagnumBottle) {
-        bottleSizeIcon = '<span class="text-[10px] font-semibold">1.5L</span>'
+        bottleSizeIcon = '<span class="text-[10px] text-off-black font-semibold">1.5L</span>'
     } else if (wine.isSmallBottle) {
-        bottleSizeIcon = '<span class="text-[10px] font-semibold">1/2</span>'
+        bottleSizeIcon = '<span class="text-[10px] text-off-black font-semibold">1/2</span>'
     }
 
-    return `<div class="flex items-center gap-2">${colorIcon}${sparklingIcon}${fortifiedMark}</div>`
+    return `<div class="flex items-center gap-2">${colorIcon}${sparklingIcon}${fortifiedMark}${bottleSizeIcon}</div>`
 }
 
 
@@ -73,7 +73,7 @@ function renderWineTypeCell(wine) {
 function renderCell(wine, key, priceType) {
     const portfolioSoldOut = priceType === 'horeca' ? wine.isSoldOutHoreca : wine.isSoldOutPrivate
     const soldOut = wine.isSoldOut || portfolioSoldOut
-    const strikeClass = soldOut ? `line-through text-muted` : ''
+    const strikeClass = soldOut ? ` line-through text-off-black opacity-40` : ''
 
     if (key === 'price') {
         const value = priceType === 'horeca' ? wine.priceHoreca : wine.pricePrivate
@@ -106,15 +106,16 @@ function renderCell(wine, key, priceType) {
     }
 
 
-
     if (key === 'wineName') {
         let statusHtml = ''
         if (soldOut) {
-            statusHtml = `<span class="inline-flex text-status-soldout text-[10px] font-semibold">SOLD OUT!</span>`
+            statusHtml = `<span class="inline-flex ml-1 text-champagne text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-off-black bg-opacity-40 rounded-[4px]">Sold out</span>`
         } else if (wine.isNew) {
-            statusHtml = `<div class="inline-flex text-status-new text-[10px] font-semibold">NEW!</div>`
+            statusHtml = `<div class="inline-flex ml-1 bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px]">New</div>`
+        } else if (wine.isNewVintage) {
+            statusHtml = `<div class="inline-flex ml-1 bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px]">New Vintage</div>`
         } else if (wine.isBackInStock) {
-            statusHtml = `<div class="inline-flex text-status-backinstock text-[10px] font-semibold">BACK IN STOCK!</div>`
+            statusHtml = `<div class="inline-flex ml-1 bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px]">Back in stock</div>`
         }
     
         const subNameHtml = wine.wineSubName
@@ -127,7 +128,7 @@ function renderCell(wine, key, priceType) {
     if (key === 'price') {
         const value = priceType === 'horeca' ? wine.priceHoreca : wine.pricePrivate
         if (!value) return ''
-        return `<span class="font-semibold text-nowrap ${strikeClass}">${value} PLN</span>`
+        return `<span class="whitespace-nowrap font-semibold ${strikeClass}">${value} PLN</span>`
     }
 
     if (key === 'sugar') {
@@ -144,17 +145,17 @@ function renderTable (wines, priceType) {
     const columns = getVisibleColumns(wines)
 
     const headerHtml = columns
-    .map(col => `<th class="text-left font-semibold text-nowrap text-off-black">${
-      col.label ? `<span class="flex rounded-sm bg-off-black text-champagne px-2 py-0.5">${col.label}</span>` : ''
+    .map(col => `<th class="text-left font-semibold whitespace-nowrap text-off-black">${
+      col.label ? `<span class="flex rounded-[4px] bg-off-black text-champagne px-2 py-0.5">${col.label}</span>` : ''
     }</th>`)
     .join('')
 
   const rowsHtml = wines
     .map(wine => {
       const cellsHtml = columns
-        .map(col => `<td class="px-2 py-2 align-top border-off-black first:pl-0">${renderCell(wine, col.key, priceType)}</td>`)
+        .map(col => `<td class="px-2 py-[6px] align-top border-off-black first:pl-0">${renderCell(wine, col.key, priceType)}</td>`)
         .join('')
-      return `<tr class="border-t border-ink/10">${cellsHtml}</tr>`
+      return `<tr class="border-b border-off-black border-opacity-40">${cellsHtml}</tr>`
     })
     .join('')
 
@@ -162,7 +163,7 @@ function renderTable (wines, priceType) {
     return `
     <table class="w-full border-collapse font-body text-xs">
       <thead>
-        <tr class="text-muted uppercase text-xs">${headerHtml}</tr>
+        <tr class="text-off-black uppercase text-xs">${headerHtml}</tr>
       </thead>
       <tbody>${rowsHtml}</tbody>
     </table>
