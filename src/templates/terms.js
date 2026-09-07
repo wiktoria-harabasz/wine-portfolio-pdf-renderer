@@ -13,13 +13,13 @@ function renderTermsPage(pageNumber, totalPages, priceType) {
   return `
     <div class="page bg-champagne px-16 py-12 font-body" id="terms">
       <div class="flex flex-row justify-between w-full items-center mb-8">
-        <a href="#index" class="flex flex-row gap-2 items-center text-button no-underline">
-          <img src="assets/icons/star.svg" />
+        <a href="#index" class="flex flex-row gap-2 items-center uppercase font-semibold text-xs no-underline">
+          
           Powrót do Spisu Treści
         </a>
-        <div class="text-body">${String(pageNumber).padStart(2, '0')} / ${totalPages}</div>
+        <div class="text-xs text-opacity-40 text-off-black">${String(pageNumber).padStart(2, '0')} / ${totalPages}</div>
       </div>
-      <h1 class="font-semibold uppercase text-h1 mb-8">Warunki współpracy</h1>
+      <h1 class="text-h1 mb-6">Warunki współpracy</h1>
       ${paragraphs}
     </div>
   `

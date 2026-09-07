@@ -3,34 +3,36 @@
     <div class="relative">
         <div class="flex flex-row justify-between w-full items-center mb-6 ">
 
-            <a href="#index" class="flex flex-row gap-2 items-center text-xs text-off-black font-semibold">
+            <a href="#index" class="flex flex-row gap-2 items-center text-off-black font-semibold uppercase text-xs">
 
                 <!-- Header: Button and pagination -->
 
-                <img src="assets/icons/arrow.svg" class="w-2 h-2" />
+                <!-- <img src="assets/icons/arrow.svg" class="w-2 h-2" /> -->
                 Powrót do Spisu treści
             </a>
-            <div class="text-sm font-normal text-off-black opacity-40 "><!-- PRODUCER_PAGE_NUMBER --> /
+            <div class="text-xs font-normal text-off-black opacity-40 "><!-- PRODUCER_PAGE_NUMBER --> /
                 <!-- PRODUCER_TOTAL_PAGES --></div>
         </div>
 
-        <div class="grid grid-cols-[1fr_auto] mb-6">
+        <div class="grid grid-cols-[1fr_auto]">
             <div>
                 <div><!-- PRODUCER_NEW_IN_PORTFOLIO_BADGE --></div>
                 <div class="flex flex-row align-top gap-4 mb-6">
                     <div class="text-subheading-number mt-2">(<!-- PRODUCER_NUMBER -->)</div>
-                    <div class="text-h1 capitalize"><!-- PRODUCER_NAME --></div>
+                    <div class="text-h1 capitalize max-w-[12ch]"><!-- PRODUCER_NAME --></div>
                     
                     
                 </div>
-                <div class="flex flex-row items-center gap-3 mb-6">
-                    <h2 class="text-h2 capitalize"><!-- PRODUCER_COUNTRY --></h2>
-                    <h2 class="text-h2 capitalize">—</h2>
-                    <h2 class="text-h2 capitalize"><!-- PRODUCER_REGION --></h2>
+                <div class="flex gap-2 ml-10 text-xs uppercase font-semibold">
+                    <h2 class=""><!-- PRODUCER_COUNTRY --></h2>
+                    <h2 class="">—</h2>
+                    <h2 class=""><!-- PRODUCER_REGION --></h2>
+                    <h2 class="">—</h2>
+                    <div class="flex flex-col gap-1 mb-8"><!-- PRODUCER_SUBREGION --></div>
                 </div>
-                <div class="flex flex-col gap-2 mb-8"><!-- PRODUCER_SUBREGION --> </div>
+                
             </div>
-            <img src="<!-- PRODUCER_MAP -->" class="" alt="Map" />
+            <img style="min-width: 200px; margin-bottom: 24px;" src="<!-- PRODUCER_MAP -->" class="" alt="Map" />
         </div>
 
         <p class="text-body text-justify relative z-10 "><!-- PRODUCER_INFO --></p>
@@ -41,19 +43,19 @@
         <!-- Legend -->
         <div class="flex flex-row items-center gap-4 ">
             <div class="flex flex-row gap-2 items-center">
-                <img src="assets/icons/white.svg" />
+                <img style="min-width: 12px;" src="assets/icons/white.svg"/>
                 <div class="">White</div>
             </div>
             <div class="flex flex-row gap-2 items-center">
-                <img src="assets/icons/macerated.svg" />
+                <img style="min-width: 12px;" src="assets/icons/macerated.svg" />
                 <div class="">Macerated</div>
             </div>
             <div class="flex flex-row gap-2 items-center">
-                <img src="assets/icons/rose.svg" />
+                <img style="min-width: 12px;" src="assets/icons/rose.svg" />
                 <div class="">Rose</div>
             </div>
             <div class="flex flex-row gap-2 items-center">
-                <img src="assets/icons/red.svg" />
+                <img style="min-width: 12px;" src="assets/icons/red.svg" />
                 <div class="">Red</div>
             </div>
             <div class="flex flex-row gap-2 items-center">

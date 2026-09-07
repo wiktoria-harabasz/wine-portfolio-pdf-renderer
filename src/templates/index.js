@@ -141,13 +141,13 @@ function renderIndexRow(row) {
     : ''
   return `
     <a href="#producer-${p.slug}" class="index-row-link">
-      <span class="index-cell-country font-semibold">${row.country}</span>
-      <span class="index-cell-region font-semibold">${row.region}</span>
+      <span class="index-cell-country font-semibold text-sm">${row.country}</span>
+      <span class="index-cell-region font-semibold text-sm">${row.region}</span>
       <span class="index-cell-producer font-semibold">
         <div class="flex flex-row justify-between items-start">
           <div class="flex flex-row gap-2 items-start mr-8">
             <div class="producer-inner-number">(${String(p.producerNumber).padStart(2, '0')})</div>
-            <div class="flex flex-row items-center" mt-[2px]>${p.producerName}${newBadge}</div>
+            <div class="flex flex-row items-center text-sm">${p.producerName}${newBadge}</div>
           </div>
           <div class="index-cell-page text-off-black opacity-40">${String(p.pageNumber).padStart(2, '0')}</div>
         </div>
@@ -158,7 +158,7 @@ function renderIndexRow(row) {
 
 function renderIndexHeader() {
   return `
-    <div class="index-header-row">
+    <div class="index-header-row text-xs">
       <span>Country</span>
       <span>Region</span>
       <span>Producer</span>
@@ -176,7 +176,11 @@ function renderIndexPages(producers) {
     <div class="page bg-champagne px-16 py-12 font-body" ${i === 0 ? 'id="index"' : ''}>
       ${i === 0 ? `
         <h1 class="font-semibold text-h1 mb-8">Spis treści</h1>
-        <a href="#terms" class="text-sm underline mb-8 inline-block">Warunki współpracy</a>
+        <div class="flex flex-row justify-between items-start">
+          <a href="#terms" class="text-sm font-semibold underline mb-8 inline-block">Warunki współpracy</a>
+          <span class="index-cell-page text-off-black opacity-40">Page number</span>
+        </div>
+        
         ` : ''}
 
       <div class="index-grid">

@@ -9,10 +9,10 @@ const ALL_COLUMNS = [
     { key: 'classification', label: 'Classification' },
     { key: 'dosage', label: 'Dosage' },
     { key: 'sugar', label: 'Sugar' },
-    { key: 'degorgement', label: 'Degorgement' },
+    { key: 'degorgement', label: 'Disg.' },
     { key: 'base', label: 'Base' },
-    { key: 'isSansSulfite', label: '' }, // boolean, show "sans sulfite" if true
-    { key: 'isAllocationOnly', label: '' }, // boolean, show "Allocation Only!" if true
+    { key: 'isSansSulfite', label: 'Other' }, // boolean, show "sans sulfite" if true
+    { key: 'isAllocationOnly', label: 'Other' }, // boolean, show "Allocation Only!" if true
     { key: 'price', label: 'Price' },
     
 ]
@@ -47,11 +47,11 @@ const WINE_TYPE_ICONS = {
 function renderWineTypeCell(wine) {
     const iconPath = WINE_TYPE_ICONS[wine.wineType]
     const colorIcon = iconPath
-    ? `<img src="${iconPath}" alt="${wine.wineType}" class="w-[11px] h-[11px]" />`
+    ? `<img src="${iconPath}" alt="${wine.wineType}" class="min-w-[10px] w-[10px] h-[11px] self-center" />`
     : ''
 
     const sparklingIcon = wine.isSparkling
-    ? '<img src="assets/icons/sparkling.svg" alt="sparkling" class="w-[10px] h-[10px]" />'
+    ? '<img src="assets/icons/sparkling.svg" alt="sparkling" class="min-w-[10px] w-[10px] h-[10px]" />'
     : ''
 
     const fortifiedMark = wine.isFortified
@@ -65,7 +65,7 @@ function renderWineTypeCell(wine) {
         bottleSizeIcon = '<span class="text-[10px] text-off-black font-semibold">1/2</span>'
     }
 
-    return `<div class="flex items-center gap-2">${colorIcon}${sparklingIcon}${fortifiedMark}${bottleSizeIcon}</div>`
+    return `<div class="flex items-center gap-1">${colorIcon}${sparklingIcon}${fortifiedMark}${bottleSizeIcon}</div>`
 }
 
 
@@ -109,13 +109,13 @@ function renderCell(wine, key, priceType) {
     if (key === 'wineName') {
         let statusHtml = ''
         if (soldOut) {
-            statusHtml = `<span class="inline-flex ml-1 text-champagne text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-off-black bg-opacity-40 rounded-[4px]">Sold out</span>`
+            statusHtml = `<span class="inline-flex text-champagne text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-off-black bg-opacity-40 rounded-[4px] whitespace-nowrap">Sold out</span>`
         } else if (wine.isNew) {
-            statusHtml = `<div class="inline-flex ml-1 bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px]">New</div>`
+            statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">New</div>`
         } else if (wine.isNewVintage) {
-            statusHtml = `<div class="inline-flex ml-1 bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px]">New Vintage</div>`
+            statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">New Vintage</div>`
         } else if (wine.isBackInStock) {
-            statusHtml = `<div class="inline-flex ml-1 bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px]">Back in stock</div>`
+            statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">Back in stock</div>`
         }
     
         const subNameHtml = wine.wineSubName
@@ -150,10 +150,13 @@ function renderTable (wines, priceType) {
     }</th>`)
     .join('')
 
-  const rowsHtml = wines
+    const rowsHtml = wines
     .map(wine => {
       const cellsHtml = columns
-        .map(col => `<td class="px-2 py-[6px] align-top border-off-black first:pl-0">${renderCell(wine, col.key, priceType)}</td>`)
+        .map(col => {
+          const priceClass = col.key === 'price' ? ' whitespace-nowrap' : ''
+          return `<td class="px-2 py-[6px] align-top border-off-black first:pl-0${priceClass}">${renderCell(wine, col.key, priceType)}</td>`
+        })
         .join('')
       return `<tr class="border-b border-off-black border-opacity-40">${cellsHtml}</tr>`
     })
@@ -175,7 +178,7 @@ function renderProducerPage(producer, priceType) {
     const tableHtml = renderTable(producer.wines, priceType)
     const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
     const subregionHtml = producer.subregion?.length
-    ? producer.subregion.map(s => `<div class="flex items-center text-h3 flex-row gap-2"><img src="/img/star_icon.svg" class="w-4 h-4" />${s.name}</div>`).join('')
+    ? producer.subregion.map(s => `<div class="text-xs uppercase font-semibold">${s.name}</div>`).join('')
     : ''
     return template
       .replace('<!-- PRODUCER_NAME -->', producer.producerName)
