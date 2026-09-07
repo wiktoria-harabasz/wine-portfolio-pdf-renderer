@@ -17,6 +17,17 @@ const ALL_COLUMNS = [
     
 ]
 
+const WINE_TYPE_SORT_ORDER = {
+  sparkling: 0, 
+  white: 1,
+  red: 2,
+  macerated: 3,
+  rose: 3, 
+}
+
+
+
+
 function hasValue(val) {
     if (val == undefined || val == null || val == '') return false
     if (Array.isArray(val) && val.length == 0) return false
@@ -140,37 +151,49 @@ function renderCell(wine, key, priceType) {
 }
 
 
-function renderTable (wines, priceType) {
-    const columns = getVisibleColumns(wines)
+function renderTable(wines, priceType) {
+  const sortedWines = sortWinesForDisplay(wines)
+  const columns = getVisibleColumns(sortedWines)
 
-    const headerHtml = columns
-    .map(col => `<th class="text-left font-semibold whitespace-nowrap text-off-black">${
-      col.label ? `<span class="flex rounded-[4px] bg-off-black text-champagne px-2 py-0.5">${col.label}</span>` : ''
-    }</th>`)
-    .join('')
+  const headerHtml = columns
+  .map(col => `<th class="text-left font-semibold whitespace-nowrap text-off-black">${
+    col.label ? `<span class="flex rounded-[4px] bg-off-black text-champagne px-2 py-0.5">${col.label}</span>` : ''
+  }</th>`)
+  .join('')
 
-    const rowsHtml = wines
-    .map(wine => {
-      const cellsHtml = columns
-        .map(col => {
-          const priceClass = col.key === 'price' ? ' whitespace-nowrap' : ''
-          return `<td class="px-2 py-[6px] align-top border-off-black first:pl-0${priceClass}">${renderCell(wine, col.key, priceType)}</td>`
-        })
-        .join('')
-      return `<tr class="border-b border-off-black border-opacity-40">${cellsHtml}</tr>`
-    })
-    .join('')
+  const rowsHtml = sortedWines
+  .map(wine => {
+    const cellsHtml = columns
+      .map(col => {
+        const priceClass = col.key === 'price' ? ' whitespace-nowrap' : ''
+        return `<td class="px-2 py-[6px] align-top border-off-black first:pl-0${priceClass}">${renderCell(wine, col.key, priceType)}</td>`
+      })
+      .join('')
+    return `<tr class="border-b border-off-black border-opacity-40">${cellsHtml}</tr>`
+  })
+  .join('')
 
+  return `
+  <table class="w-full border-collapse font-body text-xs">
+    <thead>
+      <tr class="text-off-black uppercase text-xs">${headerHtml}</tr>
+    </thead>
+    <tbody>${rowsHtml}</tbody>
+  </table>
+`
+}
 
-    return `
-    <table class="w-full border-collapse font-body text-xs">
-      <thead>
-        <tr class="text-off-black uppercase text-xs">${headerHtml}</tr>
-      </thead>
-      <tbody>${rowsHtml}</tbody>
-    </table>
-  `
+function sortWinesForDisplay(wines) {
+  return [...wines].sort((a, b) => {
+    const rankA = a.isSparkling ? -1 : (WINE_TYPE_SORT_ORDER[a.wineType] ?? 99)
+    const rankB = b.isSparkling ? -1 : (WINE_TYPE_SORT_ORDER[b.wineType] ?? 99)
 
+    if (rankA !== rankB) return rankA - rankB
+
+    const priceA = a.pricePrivate ?? a.priceHoreca ?? 0
+    const priceB = b.pricePrivate ?? b.priceHoreca ?? 0
+    return priceA - priceB
+  })
 }
 
 function renderProducerPage(producer, priceType) {
