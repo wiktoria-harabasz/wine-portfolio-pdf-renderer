@@ -132,10 +132,9 @@ function renderCell(wine, key, priceType) {
     }
 
     if (key === 'sugar') {
-        return wine.sugar
-            ? `<span class=" ${strikeClass}">${wine.sugar} g/l</span>`
-            : ''
-    }
+      if (wine.sugar === undefined || wine.sugar === null) return ''
+      return `<span class="${strikeClass}">${wine.sugar} g/l</span>`
+  }
 
       return `<span class="${strikeClass}">${wine[key] ?? ''}</span>`
 }

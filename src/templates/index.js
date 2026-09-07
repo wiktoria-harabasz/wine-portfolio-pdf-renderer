@@ -177,7 +177,7 @@ function renderIndexPages(producers) {
       ${i === 0 ? `
         <h1 class="font-semibold text-h1 mb-8">Spis treści</h1>
         <div class="flex flex-row justify-between items-start">
-          <a href="#terms" class="text-sm font-semibold underline mb-8 inline-block">Warunki współpracy</a>
+          <a href="#terms" class="text-sm font-semibold underline mb-8 inline-block no-underline">Warunki współpracy</a>
           <span class="index-cell-page text-off-black opacity-40">Page number</span>
         </div>
         
