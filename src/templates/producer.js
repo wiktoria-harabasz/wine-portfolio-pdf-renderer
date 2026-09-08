@@ -228,7 +228,7 @@ function renderProducerPage(producer, priceType) {
     : ''
     return template
       .replace('<!-- PRODUCER_NAME -->', producer.producerName)
-      .replace('<!-- PRODUCER_SUBNAME -->', producer.producerSubname)
+      .replace('<!-- PRODUCER_SUBNAME -->', producer.producerSubname || '')
       .replace('<!-- PRODUCER_SLUG -->', producer.slug || producer._id)
       .replace('<!-- PRODUCER_COUNTRY -->', producer.country || '')
       .replace('<!-- PRODUCER_REGION -->', producer.region?.name || '')
