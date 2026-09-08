@@ -7,14 +7,14 @@ const TERMS_CONTENT = {
             Poniżej podstawowe zasady współpracy:
         <div>
         <ul class="mt-2">
-            <li>Ceny odnoszą się do wartości brutto</li>
-            <li>Alokacje są ustalane indywidualnie</li>
-            <li>Ceny obowiązują do momentu wysłania nowego cennika</li>
-            <li>Minimum logistyczne to 6 butelek lub 500 PLN, chyba że strony ustalą inaczej</li>
-            <li>Dostawy realizowane są dwa razy w tygodniu, czas realizacji zamówienia do 4 dni roboczych</li>
-            <li>Za każde zamówienie obowiązuje przedpłata</li>
-            <li>Nieopłacone faktury mogą skutkować zawieszeniem lub zerwaniem współpracy</li>
-            <li>Towar aż do otrzymania pełnej płatności stanowi własność firmy NOWOFALOWI SP. Z O. O.</li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Ceny odnoszą się do wartości brutto</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Alokacje są ustalane indywidualnie</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Ceny obowiązują do momentu wysłania nowego cennika</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Minimum logistyczne to 6 butelek lub 500 PLN, chyba że strony ustalą inaczej</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Dostawy realizowane są dwa razy w tygodniu, czas realizacji zamówienia do 4 dni roboczych</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Za każde zamówienie obowiązuje przedpłata</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Nieopłacone faktury mogą skutkować zawieszeniem lub zerwaniem współpracy</span></li>
+            <li class="ml-2 flex gap-2"><span>◦</span> <span>Towar aż do otrzymania pełnej płatności stanowi własność firmy NOWOFALOWI SP. Z O. O.</span></li>
         </ul>
         <div class="flex flex-col gap-2 mt-4">
             <div class="flex flex-col gap-1">
@@ -35,15 +35,15 @@ const TERMS_CONTENT = {
 dobre relacje i długofalowe partnerstwo, oparte o transparentność, rzetelność, kompetencję i serdeczność.
 Poniżej podstawowe zasady współpracy:
 <ul class="mt-2">
-    <li>Ceny odnoszą się do wartości netto</li>
-    <li>Alokacje są ustalane indywidualnie</li>
-    <li>Ceny obowiązują do momentu wysłania nowego cennika</li>
-    <li>Minimum logistyczne to 12 butelek lub 1000 PLN, chyba że strony ustalą inaczej</li>
-    <li>Dostawy realizowane są dwa razy w tygodniu, czas realizacji zamówienia do 4 dni roboczych</li>
-    <li>Za pierwsze zamówienie obowiązuje przedpłata, za następne FV z 14 dniowym terminem płatności</li>
-    <li>Nieopłacone faktury mogą skutkować zawieszeniem lub zerwaniem współpracy</li>
-    <li>Towar aż do otrzymania pełnej płatności stanowi własność firmy NOWOFALOWI SP. Z O. O.</li>
-    <li>Większość butelek możemy dostarczyć na życzenie jako pojedynczą próbkę w cenie 75% ceny wyjściowej</li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Ceny odnoszą się do wartości netto</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Alokacje są ustalane indywidualnie</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Ceny obowiązują do momentu wysłania nowego cennika</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Minimum logistyczne to 12 butelek lub 1000 PLN, chyba że strony ustalą inaczej</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Dostawy realizowane są dwa razy w tygodniu, czas realizacji zamówienia do 4 dni roboczych</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Za pierwsze zamówienie obowiązuje przedpłata, za następne FV z 14 dniowym terminem płatności</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Nieopłacone faktury mogą skutkować zawieszeniem lub zerwaniem współpracy</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Towar aż do otrzymania pełnej płatności stanowi własność firmy NOWOFALOWI SP. Z O. O.</span></li>
+    <li class="ml-2 flex gap-2"><span>◦</span> <span>Większość butelek możemy dostarczyć na życzenie jako pojedynczą próbkę w cenie 75% ceny wyjściowej</span></li>
 
 </ul>
 <div class="flex flex-col gap-2 mt-4">

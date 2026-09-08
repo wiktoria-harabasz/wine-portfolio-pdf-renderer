@@ -180,10 +180,10 @@ function renderIndexPages(producers, totalPages) {
       </div>
 
       ${i === pages.length - 1 ? `
-        <div class="px-2 flex flex-row justify-between items-start mt-8">
-          <a href="#terms" class="text-sm font-semibold no-underline">Warunki współpracy</a>
+        <a href="#terms" class="px-2 flex flex-row justify-between items-start mt-8">
+          <span class="text-sm font-semibold no-underline">Warunki współpracy</span>
           <span class="index-cell-page text-off-black opacity-40">${String(totalPages).padStart(2, '0')}</span>
-        </div>
+        </a>
       ` : ''}
     </div>
   `).join('')
