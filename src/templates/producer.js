@@ -183,6 +183,30 @@ function renderTable(wines, priceType) {
 `
 }
 
+function splitWinesByChampagne(wines) {
+  return {
+    champagne: wines.filter(w => w.isChampagne),
+    other: wines.filter(w => !w.isChampagne),
+  }
+}
+
+function renderWineTables(wines, priceType) {
+  const { champagne, other } = splitWinesByChampagne(wines)
+
+  let html = ''
+
+  if (champagne.length) {
+    html += renderTable(champagne, priceType)
+  }
+
+  if (other.length) {
+    const spacing = champagne.length ? 'mt-6' : ''
+    html += `<div class="${spacing}">${renderTable(other, priceType)}</div>`
+  }
+
+  return html
+}
+
 function sortWinesForDisplay(wines) {
   return [...wines].sort((a, b) => {
     const rankA = a.isSparkling ? -1 : (WINE_TYPE_SORT_ORDER[a.wineType] ?? 99)
@@ -197,7 +221,7 @@ function sortWinesForDisplay(wines) {
 }
 
 function renderProducerPage(producer, priceType) {
-    const tableHtml = renderTable(producer.wines, priceType)
+    const tableHtml = renderWineTables(producer.wines, priceType)
     const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
     const subregionHtml = producer.subregion?.length
     ? producer.subregion.map(s => `<div class="text-xs uppercase font-semibold">${s.name}</div>`).join('')

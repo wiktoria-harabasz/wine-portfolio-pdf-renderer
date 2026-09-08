@@ -20,6 +20,7 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
         degorgement,
         base,
         bottled,
+        isChampagne,
         isSparkling,
         isFortified,
         isSmallBottle,
