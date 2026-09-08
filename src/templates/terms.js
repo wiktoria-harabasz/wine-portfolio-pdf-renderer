@@ -14,7 +14,7 @@ function renderTermsPage(pageNumber, totalPages, priceType) {
     <div class="page bg-champagne px-16 py-12 font-body" id="terms">
       <div class="flex flex-row justify-between w-full items-center mb-8">
         <a href="#index" class="flex gap-2 items-center">
-            <img src="assets/icons/chevron_left" style="width: 5px"/>
+            <img src="assets/icons/chevron_left.svg" style="width: 5px"/>
             <span class="flex flex-row gap-2 items-center font-semibold text-sm text-off-black opacity-40 no-underline">
             Powrót do Spisu Treści
             </span>
