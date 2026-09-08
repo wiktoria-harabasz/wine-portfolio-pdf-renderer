@@ -36,13 +36,6 @@ async function renderWineDatabasePdf() {
   const pdfBuffer = await page.pdf({
     format: 'A4',
     printBackground: true,
-    displayHeaderFooter: true,
-    headerTemplate: '<div></div>',
-    footerTemplate: `
-      <div style="font-size:9px; width:100%; text-align:right; padding-right:20mm;">
-        <span class="pageNumber"></span> / <span class="totalPages"></span>
-      </div>
-    `,
     margin: { top: '0mm', bottom: '15mm', left: '0mm', right: '0mm' },
   })
 
