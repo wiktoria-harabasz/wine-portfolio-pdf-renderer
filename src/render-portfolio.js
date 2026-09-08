@@ -26,7 +26,7 @@ async function buildPortfolioHtml(priceType) {
     producersWithVisibleWines.forEach((p, i) => { p.pageNumber = numberOfIndexPages + 1 + i })
     const totalPages = numberOfIndexPages + producersWithVisibleWines.length + 1
   
-    let allPagesHtml = renderIndexPages(producersWithVisibleWines)
+    let allPagesHtml = renderIndexPages(producersWithVisibleWines, totalPages)
   
     for (const p of producersWithVisibleWines) {
       const pageHtml = renderProducerPage({ ...p, totalPages }, priceType)

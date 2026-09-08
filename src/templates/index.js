@@ -166,27 +166,25 @@ function renderIndexHeader() {
   `
 }
 
-function renderIndexPages(producers) {
+function renderIndexPages(producers, totalPages) {
   const allRows = buildIndexRows(producers)
   const pages = chunkRowsIntoPages(allRows)
 
-  
-
   return pages.map((pageRows, i) => `
     <div class="page bg-champagne px-16 py-12 font-body" ${i === 0 ? 'id="index"' : ''}>
-      ${i === 0 ? `
-        <h1 class="font-semibold text-h1 mb-8">Spis treści</h1>
-        <div class="flex flex-row justify-between items-start">
-          <a href="#terms" class="text-sm font-semibold underline mb-8 inline-block no-underline">Warunki współpracy</a>
-          <span class="index-cell-page text-off-black opacity-40">Page number</span>
-        </div>
-        
-        ` : ''}
+      ${i === 0 ? '<h1 class="font-semibold text-h1 mb-8">Spis treści</h1>' : ''}
 
       <div class="index-grid">
         ${renderIndexHeader()}
         ${pageRows.map(renderIndexRow).join('')}
       </div>
+
+      ${i === pages.length - 1 ? `
+        <div class="px-2 flex flex-row justify-between items-start mt-8">
+          <a href="#terms" class="text-sm font-semibold no-underline">Warunki współpracy</a>
+          <span class="index-cell-page text-off-black opacity-40">${String(totalPages).padStart(2, '0')}</span>
+        </div>
+      ` : ''}
     </div>
   `).join('')
 }
