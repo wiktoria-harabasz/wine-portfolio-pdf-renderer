@@ -58,6 +58,8 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
   )
 } | order(countryOrder asc, region.name asc, producerName asc)`
 
+const PORTFOLIO_SETTINGS_QUERY = `*[_type == "portfolioSettings"][0]{coverLabel}`
+
 const ALL_WINES_QUERY = `*[_type == "wine"] | order(producer->country asc, producer->region->name asc, producer->producerName asc){
   _id,
   wineName,
@@ -93,4 +95,4 @@ const WINE_SPEC_QUERY = `*[_type == "wine" && _id == $id][0]{
 }`
   
   
-  module.exports = { PRODUCER_QUERY, ALL_PRODUCERS_QUERY, ALL_WINES_QUERY, WINE_SPEC_QUERY }
+  module.exports = { PRODUCER_QUERY, ALL_PRODUCERS_QUERY, ALL_WINES_QUERY, WINE_SPEC_QUERY, PORTFOLIO_SETTINGS_QUERY }

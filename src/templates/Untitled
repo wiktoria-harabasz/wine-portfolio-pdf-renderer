@@ -1,0 +1,10 @@
+function renderCoverPage(coverLabel) {
+  return `
+    <div class="page bg-champagne px-16 py-12 font-body flex flex-col justify-center items-center" id="cover">
+      <h1 class="font-semibold uppercase text-h1 mb-4">Portfolio</h1>
+      <h2 class="text-h2">${coverLabel || ''}</h2>
+    </div>
+  `
+}
+
+module.exports = { renderCoverPage }
