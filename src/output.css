@@ -718,6 +718,10 @@ video {
   max-width: 12ch;
 }
 
+.max-w-\[20ch\] {
+  max-width: 20ch;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }

@@ -1,5 +1,6 @@
 const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     producerName,
+    producerSubname,
     isNewInPortfolio,
     country,
     region->{name},
@@ -41,6 +42,7 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
   const ALL_PRODUCERS_QUERY = `*[_type == "producer"]{
   _id,
   producerName,
+  producerSubname,
   isNewInPortfolio,
   country,
   region->{name},

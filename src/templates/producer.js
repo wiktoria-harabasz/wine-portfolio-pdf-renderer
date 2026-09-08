@@ -224,10 +224,11 @@ function renderProducerPage(producer, priceType) {
     const tableHtml = renderWineTables(producer.wines, priceType)
     const template = fs.readFileSync('./src/producer-template.html', 'utf-8')
     const subregionHtml = producer.subregion?.length
-    ? producer.subregion.map(s => `<div class="text-xs uppercase font-semibold">${s.name}</div>`).join('')
+    ? producer.subregion.map(s => `<div class="text-sm font-semibold">${s.name}</div>`).join('')
     : ''
     return template
       .replace('<!-- PRODUCER_NAME -->', producer.producerName)
+      .replace('<!-- PRODUCER_SUBNAME -->', producer.producerSubname)
       .replace('<!-- PRODUCER_SLUG -->', producer.slug || producer._id)
       .replace('<!-- PRODUCER_COUNTRY -->', producer.country || '')
       .replace('<!-- PRODUCER_REGION -->', producer.region?.name || '')
