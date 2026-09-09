@@ -123,11 +123,11 @@
     background: #140a0a;
     color: #fffdf1;
     font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
+    font-size: 14px;
     padding: 0.125rem 0.5rem;
     display:flex;
-    border-radius: 4px
+    border-radius: 4px;
+    margin-bottom: 4px;
   }
 
 
@@ -200,6 +200,9 @@
   }
   .index-page-number {
     float: right;
+    font-weight: 300;
+    color: #140a0a!important;
+    opacity: 0.4;
   }
   .index-grid {
     display: grid;
@@ -219,8 +222,25 @@
   }
 
 .text-muted {
-
    color: #140a0a!important;
    opacity: 0.4;
 
   } 
+
+  .index-grid-wines {
+    display: grid;
+    grid-template-columns: 5rem 9rem 9rem 1fr;
+    gap: 0.25rem;
+    align-items: start;
+  }
+
+  .wine-spec-body {
+    overflow: hidden; /* contains the float so subsequent page sections don't get affected */
+  }
+  
+  .bottle-float-image {
+    float: right;
+    max-height: 500px;
+    margin-left: 1.5rem;
+    margin-bottom: 0.5rem;
+  }

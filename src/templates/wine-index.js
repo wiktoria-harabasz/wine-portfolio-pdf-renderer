@@ -1,99 +1,120 @@
-function groupByCountryRegionProducer(wines) {
-  const grouped = {}
+const UNITS_PER_INDEX_PAGE = 38 // tune after a visual test — same scale as before, but now measured in weighted units, not raw rows
+const WRAP_THRESHOLD = 34 // characters — tune based on your actual column width/font size
+
+function estimateRowWeight(wine) {
+  const text = `${wine.wineName}${wine.vintage ? ' ' + wine.vintage : ''}`
+  return text.length > WRAP_THRESHOLD ? 2 : 1
+}
+
+function chunkWinesIntoPages(wines, unitsPerPage = UNITS_PER_INDEX_PAGE) {
+  const pages = []
+  let currentPage = []
+  let currentUnits = 0
+
+  wines.forEach(w => {
+    const weight = estimateRowWeight(w)
+    if (currentUnits + weight > unitsPerPage && currentPage.length > 0) {
+      pages.push(currentPage)
+      currentPage = []
+      currentUnits = 0
+    }
+    currentPage.push(w)
+    currentUnits += weight
+  })
+
+  if (currentPage.length) pages.push(currentPage)
+  return pages
+}
+
+// Builds display rows for ONE page at a time — tracking resets per page,
+// so the first row of every page always shows full Country/Region/Producer context
+function buildRowsForPage(wines) {
+  const rows = []
+  let lastCountry = null
+  let lastRegion = null
+  let lastProducer = null
+
   wines.forEach(w => {
     const country = w.country
     const region = w.region || 'Other'
     const producer = w.producerName
-    if (!grouped[country]) grouped[country] = {}
-    if (!grouped[country][region]) grouped[country][region] = {}
-    if (!grouped[country][region][producer]) grouped[country][region][producer] = []
-    grouped[country][region][producer].push(w)
+    const isNewCountry = country !== lastCountry
+    const isNewRegion = isNewCountry || region !== lastRegion
+    const isNewProducer = isNewRegion || producer !== lastProducer
+
+    rows.push({
+      country: isNewCountry ? country : '',
+      region: isNewRegion ? region : '',
+      producer: isNewProducer ? producer : '',
+      wine: w,
+    })
+
+    lastCountry = country
+    lastRegion = region
+    lastProducer = producer
   })
-  return grouped
+
+  return rows
 }
 
-function renderWineRow(w) {
-  return `
-    <li>
-      
-      <a href="#wine-${w.slug}" class="flex justify-between items-center text-off-black no-underline">
-        
-        <span>${w.wineName}${w.vintage ? ' ' + w.vintage : ''}</span>
-       
-        <span class="text-muted text-sm">${w.pageNumber}</span>
-      </a>
-    </li>
-  `
-}
 
-function renderProducerGroup(producer, wines) {
-  return `
-   
-     
-        <h5 class="font-semibold text-sm uppercase">${producer}</h5>
-      
-      <ul class="flex flex-col gap-4">
-      
-        ${wines.map(renderWineRow).join('')}
-      </ul>
-     
-   
-  `
-}
+function renderWineIndexPages(wines) {
+  const pageChunks = chunkWinesIntoPages(wines)
 
-function renderRegionGroup(region, producers) {
-  return `
-   
-      
-        
-          
-     
-      
-      <div class="grid grid-cols-[25%_25%_50%] gap-y-4">
-      <h4 class="font-semibold uppercase text-sm">${region}</h4>
-        ${Object.entries(producers).map(([producer, wines]) => renderProducerGroup(producer, wines)).join('')}
+  // Record which index page each wine ended up on, keyed by wine _id
+  const wineToIndexPage = {}
+  pageChunks.forEach((chunkWines, i) => {
+    chunkWines.forEach(w => { wineToIndexPage[w._id] = i + 1 })
+  })
+
+  const html = pageChunks.map((chunkWines, i) => {
+    const pageRows = buildRowsForPage(chunkWines)
+    return `
+      <div class="page bg-champagne p-8 font-body" id="index-page-${i + 1}">
+        ${i === 0 ? '<h1 class="font-semibold text-h1 mb-8">Wine Database</h1>' : ''}
+        <div class="index-grid-wines">
+          ${renderIndexHeader()}
+          ${pageRows.map(renderIndexRow).join('')}
+        </div>
       </div>
-     
-  `
+    `
+  }).join('')
+
+  return { html, wineToIndexPage }
 }
 
-function renderCountryGroup(country, regions) {
+function renderIndexRow(row) {
+  const w = row.wine
   return `
-    <div class="flex flex-col gap-4">
-    
-         
-          <h3 class=" flex rounded bg-off-black text-champagne px-2 py-0.5 font-semibold text-sm uppercase">${country}</h3>
-      
-    
-      
-      
-        ${Object.entries(regions).map(([region, producers]) => renderRegionGroup(region, producers)).join('')}
-     
-    </div>
-  `
-}
-
-function renderWineIndexPage(wines) {
-  const grouped = groupByCountryRegionProducer(wines)
-  const countriesHtml = Object.entries(grouped)
-    .map(([country, regions]) => renderCountryGroup(country, regions))
-    .join('')
-
-  return `
-    <div class="page bg-champagne px-16 py-12 font-body" id="index">
-      <h1 class="font-semibold uppercase text-h1 mb-8">Wine Database</h1>
-      <div class="flex flex-col gap-8">
-        ${countriesHtml}
+    <a href="#wine-${w.slug}" class="index-row">
+      <div class="index-cell-country text-sm font-semibold ">${row.country}</div>
+      <div class="index-cell-region text-sm font-semibold">${row.region}</div>
+      <div class="index-cell-producer text-sm font-semibold">${row.producer}</div>
+      <div class="flex flex-row justify-between items-start px-2">
+        <div class="flex flex-row gap-2 items-start mr-8">
+          <div class="producer-inner-number font-semibold">(${String(row.wine.wineNumber).padStart(2, '0')})</div>
+          <div class="font-semibold text-sm text-off-black ">${w.wineName}${w.vintage ? ' ' + w.vintage : ''}</div>
+        </div>
+        <div class="index-page-number text-muted text-sm">${String(w.pageNumber).padStart(2, '0')}</div>
       </div>
+    </a>
+  `
+}
+
+function renderIndexHeader() {
+  return `
+    <div class="index-header-row">
+      <span>Country</span>
+      <span>Region</span>
+      <span>Producer</span>
+      <span>Wine</span>
     </div>
   `
 }
 
 
-// <div class="flex flex-row gap-1 items-center">
-//           <div class="w-1 h-1 border border-solid border-off-black rounded-lg "></div>
-//           <div class="w-1 h-1 border border-solid border-off-black rounded-lg "></div>
-//           <div class="w-1 h-1 border border-solid border-off-black rounded-lg "></div>
-//         </div>
+function countIndexPages(wines, unitsPerPage = UNITS_PER_INDEX_PAGE) {
+  return chunkWinesIntoPages(wines, unitsPerPage).length
+}
 
-module.exports = { renderWineIndexPage }
+module.exports = { renderWineIndexPages, countIndexPages }
