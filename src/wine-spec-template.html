@@ -22,7 +22,7 @@
             </div>
             <div class="ml-11 text-off-black text-2xl font-semibold"><!-- WINE_SUBNAME --></div>
         </div>
-        <div class="ml-11 flex flex-row items-start gap-2 mb-8">
+        <div class="ml-11 flex flex-row items-start gap-2 mb-6">
             <span class="text-sm font-semibold text-off-black capitalize"><!-- COUNTRY --></span>
             <span class="text-sm font-semibold text-off-black capitalize">—</span>
             <span class="text-sm font-semibold text-off-black capitalize""><!-- REGION --></span>
@@ -37,43 +37,58 @@
             <div class="ml-11 flex gap-8 align-start">
             
             <div class="flex flex-col gap-4">
-               
-                    <div class="flex flex-col gap-2">
-                        <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Producer</div>
-                        <div class="pl-2 text-off-black text-sm capitalize"><!-- PRODUCER_NAME --></div>
-                    </div>
                     
-                    <div class="flex flex-col gap-2">
-                        <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Vintage</div>
-                        <div class="pl-2 text-off-black text-sm capitalize"><!-- VINTAGE --></div>
+                    <div class="grid grid-cols-3 gap-x-1 gap-y-2">
+
+                        <div class="flex flex-col gap-2">
+                            <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Producer</div>
+                            <div class=" px-2 text-off-black text-sm capitalize"><!-- PRODUCER_NAME --></div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Wine Details</div>
+                            <div class="pl-2 text-off-black text-sm capitalize flex gap-2 items-center">
+                                <span><!-- VINTAGE --></span>
+                                <span class="min-w-1 w-1 min-h-1 h-1 rounded-[1px] flex bg-off-black"></span>
+                               
+                                <!-- WINE_TYPE_AND_ATTRIBUTES -->
+                            </div>
+                            
+                        </div>
+
+                        
+                        <div class="flex flex-col gap-2">
+                            <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Grape Variety</div>
+                            <div class="px-2 flex flex-col text-off-black text-sm capitalize"><!-- GRAPE_VARIETY --></div>
+                        </div>
+                        
+                        <!-- WINE_DETAILS -->
                     </div>
-                    <div class="flex flex-col gap-2">
-                        <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Grape Variety</div>
-                        <div class="pl-2 flex flex-col text-off-black text-sm capitalize"><!-- GRAPE_VARIETY --></div>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Wine Type</div>
-                        <div class="pl-2 text-off-black text-sm capitalize flex gap-2"><span class=""><!-- WINE_TYPE --></span><!-- WINE_ATTRIBUTES --></div>
-                    </div>
+               
+                   
+                    
+                    
+                   
+                    
+                    
                 
                
                 <div class="flex flex-col gap-2">
-                    <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Vintage Report</div>
+                    <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Vintage Report</div>
                     <div class="pl-2 text-off-black text-sm text-justify"><!-- VINTAGE_REPORT --></div>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Terroir</div>
+                    <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Terroir</div>
                     <div class="pl-2 text-off-black text-sm text-justify"><!-- TERROIR --></div>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Winemaking</div>
+                    <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Winemaking</div>
                     <div class="pl-2 text-off-black text-sm text-justify"><!-- WINEMAKING --></div>
                 </div>
                 <div class="flex flex-col gap-2">
-                    <div class="text-champagne py-0.5 px-2 rounded-[4px] bg-off-black text-sm font-semibold">Tasting Notes</div>
+                    <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">Tasting Notes</div>
                     <div class="pl-2 text-off-black text-sm text-justify"><!-- TASTING_NOTES --></div>
                 </div>
-                 <!-- WINE_DETAILS -->
+                 
             </div>
                 <img
                 src="<!-- BOTTLE_IMAGE -->" style="max-height: 400px;"

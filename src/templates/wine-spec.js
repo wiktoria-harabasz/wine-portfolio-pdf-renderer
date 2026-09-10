@@ -58,21 +58,25 @@ function renderWineDetails(wine) {
     .filter(field => hasValue(wine[field.key]))
     .map(field => `
       <div class="flex flex-col gap-1">
-        <div class="text-off-black text-sm font-semibold">${field.label}</div>
-        <div class="text-off-black text-sm capitalize">${wine[field.key]}${field.suffix || ''}</div>
+        <div class="text-champagne font-semibold text-sm px-2 py-0.5 rounded bg-off-black">${field.label}</div>
+        <div class="px-2 text-off-black text-sm capitalize">${wine[field.key]}${field.suffix || ''}</div>
       </div>
     `)
     .join('')
 }
 
-function renderBooleanLabels(wine) {
+function renderWineTypeAndAttributes(wine) {
   const labels = []
   if (wine.isSparkling) labels.push('Sparkling')
   if (wine.isFortified) labels.push('Fortified')
   if (wine.isSansSulfite) labels.push('Sans Sulfite')
   if (wine.isMagnumBottle) labels.push('Magnum')
   if (wine.isSmallBottle) labels.push('0.375L')
-  return labels.join(' · ')
+
+  const dot = '<span class="w-1 h-1 rounded-[1px] bg-off-black"></span>'
+
+  const parts = [wine.wineType, ...labels].filter(Boolean)
+  return parts.map(text => `<span>${text}</span>`).join(dot)
 }
 
 async function renderWineSpecPage(wine) {
@@ -88,8 +92,7 @@ async function renderWineSpecPage(wine) {
     .replace('<!-- BACK_TO_INDEX_ANCHOR -->', wine.backToIndexAnchor || 'index-page-1')
     .replace('<!-- WINE_NUMBER -->', String(wine.wineNumber).padStart(2, '0'))
     .replace('<!-- WINE_TYPE_ICON -->', typeIconHtml)
-    .replace('<!-- WINE_TYPE -->', wine.wineType || '')
-    .replace('<!-- WINE_ATTRIBUTES -->', renderBooleanLabels(wine))
+    .replace('<!-- WINE_TYPE_AND_ATTRIBUTES -->', renderWineTypeAndAttributes(wine))
     .replace('<!-- WINE_NAME -->', wine.wineName)
     .replace('<!-- WINE_SUBNAME -->', wine.wineSubName ? `${wine.wineSubName}` : '')
     .replace('<!-- VINTAGE -->', wine.vintage || '')
