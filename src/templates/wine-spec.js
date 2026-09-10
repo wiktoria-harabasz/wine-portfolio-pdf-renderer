@@ -38,6 +38,33 @@ async function getImageAsDataUri(url) {
   }
 }
 
+const WINE_DETAIL_FIELDS = [
+  { key: 'classification', label: 'Classification' },
+  { key: 'dosage', label: 'Dosage' },
+  { key: 'sugar', label: 'Sugar', suffix: ' g/l' },
+  { key: 'degorgement', label: 'Degorgement' },
+  { key: 'base', label: 'Base' },
+  { key: 'bottled', label: 'Bottled' },
+]
+
+function hasValue(val) {
+  if (val === undefined || val === null || val === '') return false
+  if (Array.isArray(val) && val.length === 0) return false
+  return true
+}
+
+function renderWineDetails(wine) {
+  return WINE_DETAIL_FIELDS
+    .filter(field => hasValue(wine[field.key]))
+    .map(field => `
+      <div class="flex flex-col gap-1">
+        <div class="text-off-black text-sm font-semibold">${field.label}</div>
+        <div class="text-off-black text-sm capitalize">${wine[field.key]}${field.suffix || ''}</div>
+      </div>
+    `)
+    .join('')
+}
+
 function renderBooleanLabels(wine) {
   const labels = []
   if (wine.isSparkling) labels.push('Sparkling')
@@ -57,6 +84,7 @@ async function renderWineSpecPage(wine) {
 
   return template
     .replace('<!-- WINE_SLUG -->', wine.slug || wine._id)
+    .replace('<!-- WINE_DETAILS -->', renderWineDetails(wine))
     .replace('<!-- BACK_TO_INDEX_ANCHOR -->', wine.backToIndexAnchor || 'index-page-1')
     .replace('<!-- WINE_NUMBER -->', String(wine.wineNumber).padStart(2, '0'))
     .replace('<!-- WINE_TYPE_ICON -->', typeIconHtml)
