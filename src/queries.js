@@ -2,7 +2,6 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
     producerName,
     producerSubname,
     isNewInPortfolio,
-    hideFromPortfolio,
     country,
     region->{name},
     subregion[]->{name},
