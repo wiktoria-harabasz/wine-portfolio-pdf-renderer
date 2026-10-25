@@ -90,6 +90,7 @@ const WINE_SPEC_QUERY = `*[_type == "wine" && _id == $id][0]{
   isSansSulfite,
   "bottleImageUrl": bottleImage.asset->url,
   "producerName": producer->producerName,
+  "producerInfo": producer->producerInfo,
   "country": producer->country,
   "region": producer->region->name,
   "subregion": producer->subregion[]->name,

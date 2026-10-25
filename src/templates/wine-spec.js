@@ -73,7 +73,7 @@ function renderWineTypeAndAttributes(wine) {
   if (wine.isMagnumBottle) labels.push('Magnum')
   if (wine.isSmallBottle) labels.push('0.375L')
 
-  const dot = '<span class="w-1 h-1 rounded-[1px] bg-off-black"></span>'
+  const dot = '<span class="min-w-1 w-1 min-h-1 h-1 rounded-[1px] bg-off-black"></span>'
 
   const parts = [wine.wineType, ...labels].filter(Boolean)
   return parts.map(text => `<span>${text}</span>`).join(dot)
@@ -90,13 +90,14 @@ async function renderWineSpecPage(wine) {
     .replace('<!-- WINE_SLUG -->', wine.slug || wine._id)
     .replace('<!-- WINE_DETAILS -->', renderWineDetails(wine))
     .replace('<!-- BACK_TO_INDEX_ANCHOR -->', wine.backToIndexAnchor || 'index-page-1')
-    .replace('<!-- WINE_NUMBER -->', String(wine.wineNumber).padStart(2, '0'))
+    .replace('<!-- WINE_NUMBER -->', String(wine.wineNumber).padStart(3, '00'))
     .replace('<!-- WINE_TYPE_ICON -->', typeIconHtml)
     .replace('<!-- WINE_TYPE_AND_ATTRIBUTES -->', renderWineTypeAndAttributes(wine))
     .replace('<!-- WINE_NAME -->', wine.wineName)
     .replace('<!-- WINE_SUBNAME -->', wine.wineSubName ? `${wine.wineSubName}` : '')
     .replace('<!-- VINTAGE -->', wine.vintage || '')
     .replace('<!-- PRODUCER_NAME -->', wine.producerName || '')
+    .replace('<!-- PRODUCER_INFO -->', wine.producerInfo || '')
     .replace('<!-- COUNTRY -->', wine.country || '')
     .replace('<!-- REGION -->', wine.region || '')
     .replace('<!-- SUBREGION -->', subregionHtml)

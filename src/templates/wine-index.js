@@ -92,7 +92,7 @@ function renderIndexRow(row) {
       <div class="index-cell-producer text-sm font-semibold">${row.producer}</div>
       <div class="flex flex-row justify-between items-start px-2">
         <div class="flex flex-row gap-2 items-start mr-8">
-          <div class="producer-inner-number font-semibold">(${String(row.wine.wineNumber).padStart(2, '0')})</div>
+          <div class="producer-inner-number font-semibold">(${String(row.wine.wineNumber).padStart(3, '00')})</div>
           <div class="font-semibold text-sm text-off-black ">${w.wineName}${w.vintage ? ' ' + w.vintage : ''}</div>
         </div>
         <div class="index-page-number text-muted text-sm">${String(w.pageNumber).padStart(2, '0')}</div>

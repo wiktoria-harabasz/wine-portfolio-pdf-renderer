@@ -1,4 +1,4 @@
-const ROWS_PER_INDEX_PAGE = 30
+const ROWS_PER_INDEX_PAGE = 35
 
 function buildIndexRows(producers) {
   const rows = []
