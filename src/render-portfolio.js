@@ -10,7 +10,14 @@ const { PRODUCER_QUERY, ALL_PRODUCERS_QUERY, PORTFOLIO_SETTINGS_QUERY } = requir
 
 async function buildPortfolioHtml(priceType) {
   const settings = await client.fetch(PORTFOLIO_SETTINGS_QUERY)
-  const producers = await client.fetch(ALL_PRODUCERS_QUERY)
+  const allProducers = await client.fetch(ALL_PRODUCERS_QUERY)
+  const producers = allProducers.filter(p => !p.hideFromPortfolio)
+
+  const fullProducers = await Promise.all(
+    producers.map(p => client.fetch(PRODUCER_QUERY, { id: p._id }))
+  )
+
+  
 
   const producersWithVisibleWines = []
   for (const p of producers) {
