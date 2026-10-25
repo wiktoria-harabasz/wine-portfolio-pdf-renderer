@@ -36,6 +36,8 @@ const PRODUCER_QUERY = `*[_type == "producer" && _id == $id][0]{
         hideFromHoreca,
         isSoldOutHoreca,
         isSoldOutPrivate,
+        isAvailableSoon,
+        availableSoonLabel,
     }
   }`
 

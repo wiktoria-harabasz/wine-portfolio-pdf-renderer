@@ -79,12 +79,21 @@ function renderWineTypeCell(wine) {
     return `<div class="flex items-center gap-1">${colorIcon}${sparklingIcon}${fortifiedMark}${bottleSizeIcon}</div>`
 }
 
-
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
 
 function renderCell(wine, key, priceType) {
+
     const portfolioSoldOut = priceType === 'horeca' ? wine.isSoldOutHoreca : wine.isSoldOutPrivate
     const soldOut = wine.isSoldOut || portfolioSoldOut
-    const strikeClass = soldOut ? ` line-through text-off-black opacity-40` : ''
+    const availableSoon = wine.isAvailableSoon
+    const strikeClass = soldOut
+      ? ' line-through text-off-black opacity-40'
+      : (availableSoon ? ' text-off-black opacity-40' : '')
 
     if (key === 'price') {
         const value = priceType === 'horeca' ? wine.priceHoreca : wine.pricePrivate
@@ -108,7 +117,7 @@ function renderCell(wine, key, priceType) {
         return wine.isSansSulfite 
         ? `<span class="${strikeClass} whitespace-nowrap">Sans Sulfite</span>`
         : ''
-    }
+    } 
 
     if (key === 'isAllocationOnly') {
         return wine.isAllocationOnly 
@@ -123,7 +132,10 @@ function renderCell(wine, key, priceType) {
             statusHtml = `<span class="inline-flex text-champagne text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-off-black bg-opacity-40 rounded-[4px] whitespace-nowrap">Sold out</span>`
         } else if (wine.isNew) {
             statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">New</div>`
-        } else if (wine.isNewVintage) {
+          } else if (availableSoon) {
+            const label = wine.availableSoonLabel?.trim() || 'Available soon'
+            statusHtml = `<span class="inline-flex text-off-black text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-off-black rounded-[4px] whitespace-nowrap">${escapeHtml(label)}</span>`
+          } else if (wine.isNewVintage) {
             statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">New Vintage</div>`
         } else if (wine.isBackInStock) {
             statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">Back in stock</div>`
@@ -133,7 +145,9 @@ function renderCell(wine, key, priceType) {
             ? `<div class="text-xs flex text-off-black ${strikeClass}">${wine.wineSubName}</div>`
             : ''
     
-        return `<span class="font-semibold mr-1 ${strikeClass}">${wine.wineName}</span>${statusHtml}${subNameHtml}`
+          
+          
+          return `<span class="font-semibold ${strikeClass}">${wine.wineName}</span>${statusHtml}${subNameHtml}`
     }
 
     if (key === 'price') {
