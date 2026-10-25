@@ -17,16 +17,13 @@ async function buildPortfolioHtml(priceType) {
     producers.map(p => client.fetch(PRODUCER_QUERY, { id: p._id }))
   )
 
-  
-
-  const producersWithVisibleWines = []
-  for (const p of producers) {
-    const full = await client.fetch(PRODUCER_QUERY, { id: p._id })
+  const producersWithVisibleWines = fullProducers.map((full, i) => {
+    const p = producers[i]
     const visibleWines = full.wines.filter(w =>
       priceType === 'horeca' ? !w.hideFromHoreca : !w.hideFromPrivate
     )
-    producersWithVisibleWines.push({ ...full, slug: p.slug, wines: visibleWines })
-  }
+    return { ...full, slug: p.slug, wines: visibleWines }
+  })
 
   producersWithVisibleWines.forEach((p, i) => { p.producerNumber = i + 1 })
 
