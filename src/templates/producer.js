@@ -129,17 +129,17 @@ function renderCell(wine, key, priceType) {
     if (key === 'wineName') {
         let statusHtml = ''
         if (soldOut) {
-            statusHtml = `<span class="inline-flex text-champagne text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-off-black bg-opacity-40 rounded-[4px] whitespace-nowrap">Sold out</span>`
+            statusHtml = `<span class="ml-1 inline-flex text-champagne text-[9px] leading-[11px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-off-black bg-opacity-40 rounded-[4px] whitespace-nowrap">Sold out</span>`
           } else if (availableSoon) {
             const label = wine.availableSoonLabel?.trim() || 'Available soon'
-            statusHtml = `<span class="inline-flex text-off-black text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-off-black rounded-[4px] whitespace-nowrap">${escapeHtml(label)}</span>`
+            statusHtml = `<span class="ml-1 inline-flex  text-[9px] leading-[11px] uppercase font-semibold px-[0.375rem] py-[0.125rem] bg-merlot bg-opacity-20 text-merlot rounded-[4px] whitespace-nowrap">${escapeHtml(label)}</span>`
           } else if (wine.isNew) {
-            statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">New</div>`
+            statusHtml = `<div class="ml-1 inline-flex bg-bg-status-green text-status-green text-[9px] leading-[11px] uppercase font-semibold px-[0.375rem] py-[0.125rem] rounded-[4px] whitespace-nowrap">New</div>`
           
           } else if (wine.isNewVintage) {
-            statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">New Vintage</div>`
+            statusHtml = `<div class="ml-1 inline-flex bg-bg-status-green text-status-green text-[9px] leading-[11px] uppercase font-semibold px-[0.375rem] py-[0.125rem] rounded-[4px] whitespace-nowrap">New Vintage</div>`
         } else if (wine.isBackInStock) {
-            statusHtml = `<div class="inline-flex bg-champagne text-status-green text-[9px] leading-[12px] uppercase font-semibold px-[0.375rem] py-[0.125rem] border border-solid border-status-green rounded-[4px] whitespace-nowrap">Back in stock</div>`
+            statusHtml = `<div class="ml-1 inline-flex bg-bg-status-green text-status-green text-[9px] leading-[11px] uppercase font-semibold px-[0.375rem] py-[0.125rem] rounded-[4px] whitespace-nowrap">Back in stock</div>`
         }
     
         const subNameHtml = wine.wineSubName

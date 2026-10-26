@@ -10,6 +10,8 @@ module.exports = {
         'muted': '#A0A3AB',
         'status-red': '#EE220C',
         'status-green': '#23C47C',
+        'text-status-green': '#007C4C',
+        'bg-status-green': '#E8FCF4',
         'wine-white': '#FFD931',
         'wine-macerated': '#F27200',
         'wine-rose': '#FF96CA',
